@@ -41,10 +41,10 @@ jobs:
     - name: Verify compiled Info.plist
       run: |
         APP_PATH="build/Build/Products/Release-iphoneos/SmokeQuit.app"
-        echo "=== Compiled Info.plist contents ==="
-        plutil -p "$APP_PATH/Info.plist" | grep -E "UILaunch|UIRequires|CFBundle" || true
-        echo "=== Launch screen files in bundle ==="
-        ls "$APP_PATH/" | grep -i launch || echo "No launch files found"
+        echo "=== FULL compiled Info.plist ==="
+        plutil -p "$APP_PATH/Info.plist"
+        echo "=== Launch files in bundle ==="
+        ls "$APP_PATH/" | grep -i "launch\|default" || echo "No launch files found"
 
     - name: Package IPA
       run: |
