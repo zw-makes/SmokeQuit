@@ -19,6 +19,9 @@ jobs:
     - name: Install XcodeGen
       run: brew install xcodegen
 
+    - name: Generate PNG Launch Images
+      run: python3 scripts/generate_launch_images.py
+
     - name: Generate Xcode Project
       run: xcodegen generate
 
@@ -29,10 +32,19 @@ jobs:
                    -configuration Release \
                    -sdk iphoneos \
                    -derivedDataPath build \
+                   ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME=LaunchImage \
                    CODE_SIGNING_ALLOWED=NO \
                    CODE_SIGNING_REQUIRED=NO \
                    CODE_SIGN_IDENTITY="" \
                    clean build
+
+    - name: Verify compiled Info.plist
+      run: |
+        APP_PATH="build/Build/Products/Release-iphoneos/SmokeQuit.app"
+        echo "=== Compiled Info.plist contents ==="
+        plutil -p "$APP_PATH/Info.plist" | grep -E "UILaunch|UIRequires|CFBundle" || true
+        echo "=== Launch screen files in bundle ==="
+        ls "$APP_PATH/" | grep -i launch || echo "No launch files found"
 
     - name: Package IPA
       run: |
