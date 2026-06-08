@@ -19,9 +19,6 @@ jobs:
     - name: Install XcodeGen
       run: brew install xcodegen
 
-    - name: Generate LaunchScreen Storyboard
-      run: python3 scripts/generate_launchscreen.py
-
     - name: Generate Xcode Project
       run: xcodegen generate
 
