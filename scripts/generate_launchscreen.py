@@ -2,46 +2,56 @@
 import subprocess
 import plistlib
 import os
-import re
+import io
 
-# Get exact ibtool toolsVersion from the running Xcode installation
-tools_ver = "23049"
-plugin_ver = "23034"
+# --- Get exact toolsVersion from ibtool --version plist output ---
+tools_ver = "23088"
+plugin_ver = "23070"
 
 try:
     result = subprocess.run(
-        ["xcrun", "ibtool", "--version"],
-        capture_output=True, text=True
+        ["xcrun", "ibtool", "--version", "--output-format", "xml1"],
+        capture_output=True
     )
-    output = result.stdout + result.stderr
-    m = re.search(r'toolsVersion[^=]*=\s*(\d+)', output)
-    if m:
-        tools_ver = m.group(1)
-    print(f"ibtool output: {output[:200]}")
+    plist_data = plistlib.loads(result.stdout)
+    version_dict = plist_data.get("com.apple.ibtool.version", {})
+    tools_ver = str(version_dict.get("com.apple.ibtool.document.toolsVersion", tools_ver))
+    print(f"ibtool toolsVersion: {tools_ver}")
+    print(f"ibtool version: {version_dict.get('com.apple.ibtool.version', 'unknown')}")
 except Exception as e:
-    print(f"Could not get ibtool version: {e}")
+    print(f"Could not parse ibtool version plist: {e}, using default {tools_ver}")
 
+# --- Get IBCocoaTouchPlugin version ---
 try:
     xcode_path = subprocess.run(
         ["xcode-select", "-p"],
         capture_output=True, text=True
     ).stdout.strip()
     xcode_app = xcode_path.replace("/Contents/Developer", "")
-    plugin_plist_path = os.path.join(
-        xcode_app,
-        "Contents/Developer/Library/Xib Compilers/IBCocoaTouchPlugin.ibplugin/Contents/Info.plist"
-    )
-    with open(plugin_plist_path, "rb") as f:
-        plist_data = plistlib.load(f)
-    plugin_ver = str(plist_data.get("CFBundleVersion", "23034"))
-    print(f"Plugin version from plist: {plugin_ver}")
+
+    # Try both possible plugin locations
+    possible_paths = [
+        os.path.join(xcode_app, "Contents/Developer/Library/Xib Compilers/IBCocoaTouchPlugin.ibplugin/Contents/Info.plist"),
+        os.path.join(xcode_app, "Contents/PlugIns/IBCocoaTouchPlugin.ibplugin/Contents/Info.plist"),
+        "/Applications/Xcode.app/Contents/Developer/Library/Xib Compilers/IBCocoaTouchPlugin.ibplugin/Contents/Info.plist",
+    ]
+    for plugin_path in possible_paths:
+        if os.path.exists(plugin_path):
+            with open(plugin_path, "rb") as f:
+                pdata = plistlib.load(f)
+            plugin_ver = str(pdata.get("CFBundleVersion", plugin_ver))
+            print(f"Plugin version: {plugin_ver} (from {plugin_path})")
+            break
+    else:
+        print(f"Plugin plist not found in any location, using default: {plugin_ver}")
 except Exception as e:
-    print(f"Could not get plugin version: {e}")
+    print(f"Could not get plugin version: {e}, using default: {plugin_ver}")
 
 print(f"Generating LaunchScreen.storyboard with toolsVersion={tools_ver}, pluginVersion={plugin_ver}")
 
+# NOTE: targetRuntime is intentionally omitted — it is not valid in Xcode 16+ for iOS storyboards
 storyboard = f"""<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="{tools_ver}" targetRuntime="AppleCocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="{tools_ver}" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -72,3 +82,4 @@ with open(output_path, "w", encoding="utf-8") as f:
     f.write(storyboard)
 
 print(f"Written: {output_path}")
+print("Done!")
