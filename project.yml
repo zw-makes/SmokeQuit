@@ -7,7 +7,7 @@ targets:
     platform: iOS
     deploymentTarget: "16.0"
     sources:
-      - path: SmokeQuit
+      - SmokeQuit
     info:
       properties:
         CFBundleDisplayName: "SmokeQuit"
