@@ -1,6 +1,7 @@
 name: SmokeQuit
 options:
   bundleIdPrefix: com.smokequit
+  minimumXcodeVersion: "15.0"
 targets:
   SmokeQuit:
     type: application
