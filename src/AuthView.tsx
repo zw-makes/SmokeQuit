@@ -1,47 +1,5 @@
 import React from 'react';
 
-// Pixel Art Google Icon (32x32)
-export const PixelGoogle = ({ size = 24 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-    {/* Red Arc top */}
-    <rect x="10" y="6" width="12" height="2" fill="#ea4335" />
-    <rect x="8" y="8" width="2" height="2" fill="#ea4335" />
-    <rect x="22" y="8" width="2" height="2" fill="#ea4335" />
-    
-    {/* Green Arc bottom */}
-    <rect x="10" y="24" width="12" height="2" fill="#34a853" />
-    <rect x="8" y="22" width="2" height="2" fill="#34a853" />
-    <rect x="22" y="22" width="2" height="2" fill="#34a853" />
-
-    {/* Blue Arc / Right Bar */}
-    <rect x="24" y="10" width="2" height="12" fill="#4285f4" />
-    <rect x="16" y="15" width="8" height="2" fill="#4285f4" />
-    
-    {/* Yellow Arc Left */}
-    <rect x="6" y="10" width="2" height="12" fill="#fbbc05" />
-  </svg>
-);
-
-// Pixel Art Apple Icon (32x32)
-export const PixelApple = ({ size = 24 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-    {/* Leaf */}
-    <rect x="18" y="5" width="2" height="2" fill="currentColor" />
-    <rect x="20" y="7" width="2" height="2" fill="currentColor" />
-    
-    {/* Body */}
-    <rect x="12" y="10" width="8" height="2" fill="currentColor" />
-    <rect x="10" y="12" width="12" height="2" fill="currentColor" />
-    <rect x="8" y="14" width="16" height="6" fill="currentColor" />
-    <rect x="10" y="20" width="12" height="2" fill="currentColor" />
-    <rect x="12" y="22" width="8" height="2" fill="currentColor" />
-    
-    {/* Bottom lobes */}
-    <rect x="10" y="24" width="4" height="2" fill="currentColor" />
-    <rect x="18" y="24" width="4" height="2" fill="currentColor" />
-  </svg>
-);
-
 // Pixel Art Email/Envelope Icon (32x32)
 export const PixelEnvelope = ({ size = 24 }: { size?: number }) => (
   <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
@@ -118,7 +76,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '16px',
-                padding: '16px 20px',
+                padding: '12px 20px',
                 borderRadius: '12px',
                 border: '2px solid #1e293b',
                 backgroundColor: '#ffffff',
@@ -132,7 +90,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
               }}
               className="auth-btn-google"
             >
-              <PixelGoogle size={24} />
+              <img src="/btn_google.jpg" alt="Google Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
               <span>Connect with Google</span>
             </button>
 
@@ -143,7 +101,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
                 display: 'flex',
                 alignItems: 'center',
                 gap: '16px',
-                padding: '16px 20px',
+                padding: '12px 20px',
                 borderRadius: '12px',
                 border: '2px solid #1e293b',
                 backgroundColor: '#ffffff',
@@ -157,13 +115,13 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
               }}
               className="auth-btn-apple"
             >
-              <PixelApple size={24} />
+              <img src="/btn_apple.jpg" alt="Apple Logo" style={{ width: '28px', height: '28px', objectFit: 'contain' }} />
               <span>Connect with Apple</span>
             </button>
           </div>
 
           {/* Separator line */}
-          <div style={{ display: 'flex', alignItems: 'center', margin: '32px 0 24px 0', gap: '12px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', margin: '28px 0 20px 0', gap: '12px' }}>
             <div style={{ flex: 1, height: '2px', backgroundColor: '#1e293b', opacity: 0.15 }} />
             <span style={{ fontSize: '12px', fontWeight: 'bold', color: '#1e293b', opacity: 0.5 }}>OR USE EMAIL</span>
             <div style={{ flex: 1, height: '2px', backgroundColor: '#1e293b', opacity: 0.15 }} />
@@ -194,6 +152,13 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
             <PixelEnvelope size={20} />
             <span>Continue with Email</span>
           </button>
+
+          {/* Don't have an account? Sign Up text */}
+          <div style={{ textAlign: 'center', marginTop: '16px' }}>
+            <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#555555' }}>
+              Don't have an account? <span onClick={handleAuthOption} style={{ color: '#ef4444', fontWeight: 'bold', cursor: 'pointer', textDecoration: 'underline' }}>Sign Up</span>
+            </span>
+          </div>
         </div>
 
         {/* Footer info */}
