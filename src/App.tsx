@@ -789,6 +789,18 @@ function App() {
     }
   };
 
+// Pixel Art Back Arrow
+const PixelBackArrow = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Arrow shaft */}
+    <rect x="12" y="14" width="12" height="4" fill="currentColor" />
+    {/* Arrow head */}
+    <rect x="10" y="12" width="2" height="8" fill="currentColor" />
+    <rect x="8" y="14" width="2" height="4" fill="currentColor" />
+    <rect x="6" y="16" width="2" height="2" fill="currentColor" />
+  </svg>
+);
+
   return (
     <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'} ${step <= 1 ? 'theme-cream' : 'theme-dark'}`}>
       {/* Background blobs for premium glow styling */}
@@ -805,11 +817,31 @@ function App() {
           <header className="app-header">
             <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
-              <span style={{ letterSpacing: '-0.5px' }}>Suu<span>Quit</span></span>
+              <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: '#1e293b' }}>
+                Suu<span style={{ color: '#ef4444' }}>Quit</span>
+              </span>
             </div>
             {((step > 2 && step < 5) || (step === 1 && poisonSubStep > 0)) && (
-              <button className="btn-secondary" style={{ padding: '6px 14px', borderRadius: '10px', fontSize: '12px', width: 'auto', marginLeft: 'auto' }} onClick={handleBack}>
-                ← Back
+              <button 
+                className="btn-secondary" 
+                style={{ 
+                  padding: '8px', 
+                  borderRadius: '8px', 
+                  width: '36px', 
+                  height: '36px', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginLeft: 'auto',
+                  border: '2px solid #1e293b',
+                  backgroundColor: '#ffffff',
+                  color: '#1e293b',
+                  boxShadow: '2px 2px 0px #1e293b',
+                  cursor: 'pointer'
+                }} 
+                onClick={handleBack}
+              >
+                <PixelBackArrow size={20} />
               </button>
             )}
           </header>
