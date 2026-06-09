@@ -405,8 +405,9 @@ function App() {
         {/* Navigation Header */}
         {step > 1 && (
           <header className="app-header">
-            <div className="app-logo">
-              <span>💨</span> Smoke<span>Quit</span>
+            <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+              <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '24px', height: '24px', borderRadius: '6px' }} />
+              Suu<span>Quit</span>
             </div>
             {step > 2 && step < 5 && (
               <button className="btn-secondary" style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', width: 'auto' }} onClick={handleBack}>
@@ -536,6 +537,9 @@ function App() {
           {/* SLIDE 2: Welcome Screen */}
           <div className={`slide ${step === 2 ? 'slide-active' : step < 2 ? 'slide-next' : 'slide-prev'}`}>
             <div className="slide-header">
+              <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+                <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '80px', height: '80px', borderRadius: '18px', boxShadow: '0 8px 24px rgba(0, 0, 0, 0.35)' }} />
+              </div>
               <h1 className="slide-title">
                 Breathe <span className="slide-title-gradient">Free</span>,<br />Live Fully
               </h1>
