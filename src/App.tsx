@@ -795,11 +795,23 @@ function App() {
     return () => clearInterval(timer);
   }, [step, quitDate, quitTime, poisonsHabits, selectedPoisons]);
 
+  const triggerHapticFeedback = async (style: ImpactStyle = ImpactStyle.Light) => {
+    try {
+      await Haptics.impact({ style });
+    } catch (e) {
+      if (navigator.vibrate) {
+        navigator.vibrate(style === ImpactStyle.Medium ? 45 : style === ImpactStyle.Heavy ? 60 : 20);
+      }
+    }
+  };
+
   const handleNext = () => {
+    triggerHapticFeedback(ImpactStyle.Medium);
     if (step < 5) setStep(step + 1);
   };
 
   const handleBack = () => {
+    triggerHapticFeedback(ImpactStyle.Light);
     if (step === 1) {
       if (poisonSubStep > 0) {
         setPoisonSubStep(poisonSubStep - 1);
@@ -816,6 +828,7 @@ function App() {
 
   const handleNextPills = (e: React.MouseEvent) => {
     e.stopPropagation();
+    triggerHapticFeedback(ImpactStyle.Medium);
     if (poisonSubStep < 3) {
       setPoisonSubStep(poisonSubStep + 1);
     } else {
@@ -863,7 +876,10 @@ function App() {
                   boxShadow: '2px 2px 0px #1e293b',
                   cursor: 'pointer'
                 }} 
-                onClick={() => setStep(1)}
+                onClick={() => {
+                  triggerHapticFeedback(ImpactStyle.Medium);
+                  setStep(1);
+                }}
               >
                 <PixelSkip size={16} />
               </button>
@@ -955,6 +971,7 @@ function App() {
                   className="pixel-btn"
                   onClick={(e) => {
                     e.stopPropagation();
+                    triggerHapticFeedback(ImpactStyle.Medium);
                     setStep(1);
                   }}
                   style={{ transform: 'rotate(15deg)' }}
@@ -1155,7 +1172,13 @@ function App() {
                         min="12" 
                         max="90" 
                         value={age} 
-                        onChange={(e) => setAge(parseInt(e.target.value))}
+                        onChange={(e) => {
+                          const val = parseInt(e.target.value);
+                          if (val !== age) {
+                            setAge(val);
+                            triggerHapticFeedback(ImpactStyle.Light);
+                          }
+                        }}
                         className="range-slider age-slider"
                       />
                       <div className="slider-val" style={{ margin: '8px 0 20px 0' }}>
