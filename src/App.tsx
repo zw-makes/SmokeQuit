@@ -11,22 +11,278 @@ import {
   Share2
 } from 'lucide-react';
 
+// Pixel Art Icons
+const PixelCigarette = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Smoke pixels */}
+    <rect className="smoke-p1" x="22" y="8" width="2" height="2" fill="#9ca3af" opacity="0.6" />
+    <rect className="smoke-p2" x="24" y="5" width="2" height="2" fill="#d1d5db" opacity="0.4" />
+    <rect className="smoke-p3" x="21" y="2" width="2" height="2" fill="#e5e7eb" opacity="0.2" />
+    
+    {/* Cigarette Body */}
+    <rect x="4" y="16" width="6" height="4" fill="#d97706" />
+    <rect x="4" y="16" width="6" height="1" fill="#f59e0b" />
+    <rect x="10" y="16" width="10" height="4" fill="#ffffff" />
+    <rect x="10" y="16" width="10" height="1" fill="#e5e7eb" />
+    <rect x="9" y="16" width="1" height="4" fill="#1e293b" />
+    <rect x="20" y="16" width="2" height="4" fill="#4b5563" />
+    <rect x="21" y="17" width="1" height="2" fill="#ef4444" />
+    <rect x="22" y="17" width="1" height="2" fill="#f59e0b" />
+  </svg>
+);
+
+const PixelVape = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Vapor clouds */}
+    <rect className="smoke-p2" x="14" y="6" width="3" height="3" fill="#d1d5db" opacity="0.5" />
+    <rect className="smoke-p1" x="12" y="3" width="4" height="4" fill="#e5e7eb" opacity="0.3" />
+    
+    {/* Mouthpiece */}
+    <rect x="13" y="11" width="6" height="3" fill="#1e293b" />
+    <rect x="14" y="11" width="4" height="1" fill="#475569" />
+    
+    {/* Vape body */}
+    <rect x="11" y="14" width="10" height="14" fill="#8b5cf6" />
+    <rect x="11" y="14" width="10" height="1" fill="#a78bfa" />
+    <rect x="11" y="15" width="2" height="13" fill="#a78bfa" />
+    <rect x="14" y="18" width="4" height="4" fill="#14b8a6" />
+    <rect className="vape-light" x="15" y="25" width="2" height="1" fill="#14b8a6" />
+  </svg>
+);
+
+const PixelCigar = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Smoke */}
+    <rect className="smoke-p3" x="22" y="8" width="2" height="2" fill="#9ca3af" opacity="0.6" />
+    <rect className="smoke-p1" x="24" y="5" width="2" height="2" fill="#d1d5db" opacity="0.4" />
+    <rect className="smoke-p2" x="21" y="2" width="2" height="2" fill="#e5e7eb" opacity="0.2" />
+
+    {/* Cigar Body */}
+    <rect x="4" y="15" width="16" height="5" fill="#78350f" />
+    <rect x="4" y="15" width="16" height="1" fill="#92400e" />
+    
+    {/* Gold Band */}
+    <rect x="8" y="15" width="3" height="5" fill="#f59e0b" />
+    <rect x="9" y="15" width="1" height="5" fill="#fef08a" />
+    
+    {/* Ash Tip */}
+    <rect x="20" y="15" width="3" height="5" fill="#4b5563" />
+    {/* Ember */}
+    <rect x="20" y="16" width="1" height="3" fill="#ef4444" />
+    <rect x="21" y="17" width="1" height="1" fill="#f59e0b" />
+  </svg>
+);
+
+const PixelPack = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Sticking out cigarette filters */}
+    <rect x="10" y="4" width="2" height="5" fill="#d97706" />
+    <rect x="10" y="4" width="2" height="1" fill="#f59e0b" />
+    <rect x="13" y="3" width="2" height="6" fill="#d97706" />
+    <rect x="13" y="3" width="2" height="1" fill="#f59e0b" />
+    <rect x="16" y="5" width="2" height="4" fill="#d97706" />
+    <rect x="16" y="5" width="2" height="1" fill="#f59e0b" />
+    
+    {/* Pack Box */}
+    <rect x="8" y="9" width="16" height="20" fill="#ffffff" stroke="#1e293b" strokeWidth="1" />
+    
+    {/* Red Top Lid (Marlboro Style) */}
+    <path d="M 8 9 L 24 9 L 24 15 L 19 15 L 16 18 L 13 15 L 8 15 Z" fill="#dc2626" />
+    
+    {/* Gold crest detail */}
+    <rect x="15" y="19" width="2" height="2" fill="#d97706" />
+    
+    {/* "QUIT" Text in Pixel Style */}
+    <path d="M 10 23 L 12 23 L 12 26 L 10 26 Z" fill="#1e293b" />
+    <rect x="11" y="24" width="1" height="1" fill="#ffffff" />
+    <rect x="12" y="26" width="1" height="1" fill="#1e293b" />
+    
+    <path d="M 14 23 L 14 26 L 16 26 L 16 23" stroke="#1e293b" strokeWidth="1" fill="none" />
+    
+    <path d="M 18 23 L 18 26" stroke="#1e293b" strokeWidth="1" />
+    
+    <path d="M 20 23 L 22 23 M 21 23 L 21 26" stroke="#1e293b" strokeWidth="1" />
+  </svg>
+);
+
+const PixelMatch = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Animated Flame */}
+    {/* Outer Red Flame */}
+    <path className="flame-outer" d="M13 2h6v2h2v4h-2v3h-6V8H11V4h2V2z" fill="#ef4444" />
+    {/* Middle Orange Flame */}
+    <path className="flame-mid" d="M14 4h4v2h2v3h-2v2h-4v-2h-2V6h2V4z" fill="#f97316" />
+    {/* Inner Yellow Core */}
+    <path className="flame-inner" d="M15 6h2v2h1v2h-4V8h1V6z" fill="#facc15" />
+    
+    {/* Match Head */}
+    <rect x="14" y="11" width="4" height="3" fill="#450a0a" />
+    <rect x="15" y="11" width="2" height="1" fill="#7f1d1d" />
+    
+    {/* Wooden Stick */}
+    <rect x="15" y="14" width="2" height="16" fill="#d97706" />
+    <rect x="15" y="14" width="1" height="16" fill="#b45309" />
+  </svg>
+);
+
+const PixelPills = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Silver Blister Pack Base */}
+    <rect x="6" y="4" width="20" height="24" rx="3" fill="#cbd5e1" stroke="#94a3b8" strokeWidth="1" />
+    {/* Blister pack texture / highlight */}
+    <rect x="7" y="5" width="18" height="1" fill="#f1f5f9" />
+    <rect x="7" y="6" width="1" height="20" fill="#f1f5f9" />
+    {/* Texture dots */}
+    <circle cx="8" cy="11" r="0.5" fill="#94a3b8" />
+    <circle cx="16" cy="11" r="0.5" fill="#94a3b8" />
+    <circle cx="24" cy="11" r="0.5" fill="#94a3b8" />
+    <circle cx="8" cy="18" r="0.5" fill="#94a3b8" />
+    <circle cx="16" cy="18" r="0.5" fill="#94a3b8" />
+    <circle cx="24" cy="18" r="0.5" fill="#94a3b8" />
+    
+    {/* Pockets & Capsules Grid */}
+    {/* Row 1, Col 1 */}
+    <rect x="9" y="7" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="9" y="7" width="3" height="3" fill="#1e293b" />
+    <rect x="12" y="7" width="3" height="3" fill="#ef4444" />
+    <rect x="12" y="7" width="1" height="1" fill="#fca5a5" />
+
+    {/* Row 1, Col 2 */}
+    <rect x="17" y="7" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="17" y="7" width="3" height="3" fill="#ef4444" />
+    <rect x="20" y="7" width="3" height="3" fill="#1e293b" />
+    <rect x="17" y="7" width="1" height="1" fill="#fca5a5" />
+
+    {/* Row 2, Col 1 */}
+    <rect x="9" y="14" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="9" y="14" width="3" height="3" fill="#1e293b" />
+    <rect x="12" y="14" width="3" height="3" fill="#ef4444" />
+    <rect x="12" y="14" width="1" height="1" fill="#fca5a5" />
+
+    {/* Row 2, Col 2 */}
+    <rect x="17" y="14" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="17" y="14" width="3" height="3" fill="#ef4444" />
+    <rect x="20" y="14" width="3" height="3" fill="#1e293b" />
+    <rect x="17" y="14" width="1" height="1" fill="#fca5a5" />
+
+    {/* Row 3, Col 1 */}
+    <rect x="9" y="21" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="9" y="21" width="3" height="3" fill="#ef4444" />
+    <rect x="12" y="21" width="3" height="3" fill="#1e293b" />
+    <rect x="9" y="21" width="1" height="1" fill="#fca5a5" />
+
+    {/* Row 3, Col 2 */}
+    <rect x="17" y="21" width="6" height="3" rx="1" fill="#475569" />
+    <rect x="17" y="21" width="3" height="3" fill="#1e293b" />
+    <rect x="20" y="21" width="3" height="3" fill="#ef4444" />
+    <rect x="20" y="21" width="1" height="1" fill="#fca5a5" />
+  </svg>
+);
+
+const PixelFirstAid = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Isometric First Aid Box */}
+    {/* Top Face */}
+    <path d="M16 4 L26 9 L16 14 L6 9 Z" fill="#94a3b8" />
+    <path d="M16 5 L24 9 L16 13 L8 9 Z" fill="#cbd5e1" />
+    
+    {/* Right Face */}
+    <path d="M16 14 L26 9 L26 23 L16 28 Z" fill="#475569" />
+    <path d="M17 14 L25 10 L25 22 L17 26 Z" fill="#334155" />
+
+    {/* Left/Front Face */}
+    <path d="M6 9 L16 14 L16 28 L6 23 Z" fill="#f8fafc" />
+    
+    {/* Red Cross on Front Face */}
+    {/* Vertical bar */}
+    <path d="M10 14.5 L12 15.5 L12 22.5 L10 21.5 Z" fill="#ef4444" />
+    {/* Horizontal bar */}
+    <path d="M8 14.5 L14 17.5 L14 19.5 L8 16.5 Z" fill="#ef4444" />
+  </svg>
+);
+
+
+
+const PixelFlyingMoney = () => (
+  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    {/* Left Wing */}
+    <g className="wing-left" style={{ transformOrigin: '10px 14px' }}>
+      <path d="M10 11H7v2H5v2H3v3h2v-2h2v-2h3v-3z" fill="#f1f5f9" />
+      <path d="M7 13H5v2H3v2h2v-2h2v-2z" fill="#cbd5e1" />
+    </g>
+    
+    {/* Right Wing */}
+    <g className="wing-right" style={{ transformOrigin: '22px 14px' }}>
+      <path d="M22 11h3v2h2v2h2v3h-2v-2h-2v-2h-3v-3z" fill="#f1f5f9" />
+      <path d="M25 13h2v2h2v2h-2v-2h-2v-2z" fill="#cbd5e1" />
+    </g>
+    
+    {/* Cash Stack */}
+    <rect x="10" y="16" width="12" height="2" fill="#15803d" />
+    <rect x="10" y="13" width="12" height="3" fill="#166534" />
+    <rect x="9" y="10" width="14" height="4" fill="#22c55e" />
+    <rect x="10" y="11" width="12" height="2" fill="#86efac" />
+    <rect x="15" y="11" width="2" height="2" fill="#22c55e" />
+    
+    {/* Yellow Band */}
+    <rect x="14" y="9" width="4" height="6" fill="#f59e0b" />
+    <rect x="15" y="9" width="2" height="6" fill="#d97706" />
+  </svg>
+);
+
+const PixelArrow = () => (
+  <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+    {/* Pixelated Orangish-Red Arrow Pointing Right */}
+    <rect x="4" y="11" width="10" height="2" fill="#f95c3b" />
+    <rect x="14" y="8" width="2" height="8" fill="#f95c3b" />
+    <rect x="16" y="9" width="2" height="6" fill="#f95c3b" />
+    <rect x="18" y="10" width="2" height="4" fill="#f95c3b" />
+    <rect x="20" y="11" width="2" height="2" fill="#f95c3b" />
+  </svg>
+);
+
 function App() {
   const [step, setStep] = useState(0);
 
-  // Trigger haptic feedback on slide changes
+  // Staggered element revealing state for onboarding quote slides
+  const [revealedElements, setRevealedElements] = useState(0);
+
+  // Trigger haptic feedback on slide changes, matching text animations
   useEffect(() => {
-    const triggerHaptic = async () => {
+    const timers: any[] = [];
+
+    const triggerHaptic = async (style: ImpactStyle = ImpactStyle.Light) => {
       try {
-        await Haptics.impact({ style: ImpactStyle.Medium });
+        await Haptics.impact({ style });
       } catch (e) {
-        // Fallback to web vibration
         if (navigator.vibrate) {
-          navigator.vibrate(40);
+          navigator.vibrate(style === ImpactStyle.Medium ? 40 : 25);
         }
       }
     };
-    triggerHaptic();
+
+    if (step === 0 || step === 1) {
+      setRevealedElements(0);
+
+      // Define sequential intervals (in ms) for 6 reveal steps (since Pipe is removed)
+      const staggerTimes = [400, 800, 1100, 1400, 1700, 2000];
+
+      staggerTimes.forEach((delay, index) => {
+        const t = setTimeout(() => {
+          setRevealedElements(index + 1);
+          // Quote (index 0) and Button (index 5) get Medium haptics, others get Light haptics
+          triggerHaptic(index === 0 || index === 5 ? ImpactStyle.Medium : ImpactStyle.Light);
+        }, delay);
+        timers.push(t);
+      });
+    } else {
+      // Immediate haptic trigger for other steps
+      triggerHaptic(ImpactStyle.Medium);
+    }
+
+    return () => {
+      timers.forEach((t) => clearTimeout(t));
+    };
   }, [step]);
 
   // User Profile inputs
@@ -164,22 +420,116 @@ function App() {
         <div className="slides-wrapper">
           
           {/* SLIDE 0: Cream Quote Screen 1 */}
-          <div className={`slide slide-cream ${step === 0 ? 'slide-active' : 'slide-prev'}`} onClick={() => setStep(1)}>
-            <div className="splash-quote">
-              "The smoke clears.<br />So will you - zw"
+          <div className={`slide slide-cream ${step === 0 ? 'slide-active' : 'slide-prev'}`}>
+            {/* Scattered Pixel Elements */}
+            <div style={{ position: 'absolute', top: '8%', left: '10%', transform: 'rotate(-10deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                <PixelMatch />
+              </div>
             </div>
-            <div className="click-helper">
-              Click anywhere to continue
+            <div style={{ position: 'absolute', top: '12%', right: '12%', transform: 'rotate(20deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 3 ? 'visible' : ''}`}>
+                <PixelCigarette />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', top: '44%', right: '10%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`}>
+                <PixelVape />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: '22%', left: '12%', transform: 'rotate(10deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 5 ? 'visible' : ''}`}>
+                <PixelFirstAid />
+              </div>
+            </div>
+            {/* Pill Pack Button & Pointing Arrow (Slide 0) */}
+            <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
+              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
+                  <PixelArrow />
+                </div>
+                <div 
+                  className="pixel-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setStep(1);
+                  }}
+                  style={{ transform: 'rotate(15deg)' }}
+                >
+                  <PixelPills />
+                </div>
+              </div>
+            </div>
+
+            {/* Center Quote Area */}
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', width: '100%', zIndex: 10 }}>
+              <div className={`splash-quote ${revealedElements >= 1 ? 'visible' : ''}`}>
+                "The <span style={{ position: 'relative', display: 'inline-block' }}>
+                  smoke
+                  <div 
+                    className={`pop-item ${revealedElements >= 1 ? 'visible' : ''}`}
+                    style={{ position: 'absolute', top: '-60px', left: '-10px', transform: 'rotate(-12deg)', pointerEvents: 'none' }}
+                  >
+                    <PixelCigar />
+                  </div>
+                </span> clears.<br />So will you <span style={{ color: '#f95c3b' }}>- zw</span>"
+              </div>
+            </div>
+            <div className={`click-helper ${revealedElements >= 6 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
+              Tap the pills to continue
             </div>
           </div>
 
           {/* SLIDE 1: Cream Quote Screen 2 */}
-          <div className={`slide slide-cream ${step === 1 ? 'slide-active' : step < 1 ? 'slide-next' : 'slide-prev'}`} onClick={() => setStep(2)}>
-            <div className="splash-quote">
-              "We quit together.<br />For our lungs, our wallets,<br />and our friends. - zw"
+          <div className={`slide slide-cream ${step === 1 ? 'slide-active' : step < 1 ? 'slide-next' : 'slide-prev'}`}>
+            {/* Shuffled Scattered Pixel Elements for Slide 1 */}
+            <div style={{ position: 'absolute', top: '8%', left: '12%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                <PixelFlyingMoney />
+              </div>
             </div>
-            <div className="click-helper">
-              Click anywhere to continue
+            <div style={{ position: 'absolute', top: '14%', right: '12%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 3 ? 'visible' : ''}`}>
+                <PixelPack />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', top: '48%', left: '8%', transform: 'rotate(-25deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`}>
+                <PixelCigarette />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: '20%', left: '14%', transform: 'rotate(12deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 5 ? 'visible' : ''}`}>
+                <PixelCigar />
+              </div>
+            </div>
+            {/* Pill Pack Button & Pointing Arrow (Slide 1) */}
+            <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
+              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
+                  <PixelArrow />
+                </div>
+                <div 
+                  className="pixel-btn"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setStep(2);
+                  }}
+                  style={{ transform: 'rotate(-15deg)' }}
+                >
+                  <PixelPills />
+                </div>
+              </div>
+            </div>
+
+            {/* Center Quote Area */}
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', width: '100%', zIndex: 10 }}>
+              <div className={`splash-quote ${revealedElements >= 1 ? 'visible' : ''}`}>
+                "We quit together.<br />For our lungs, our wallets,<br />and our friends. <span style={{ color: '#f95c3b' }}>- zw</span>"
+              </div>
+            </div>
+            <div className={`click-helper ${revealedElements >= 6 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
+              Tap the pills to continue
             </div>
           </div>
 
