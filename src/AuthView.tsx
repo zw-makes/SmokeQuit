@@ -50,6 +50,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [userAge, setUserAge] = useState('');
 
   useEffect(() => {
     setBgIndex(Math.random() > 0.5 ? 1 : 0);
@@ -362,6 +363,39 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="you@domain.com"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 12px 12px 42px',
+                      borderRadius: '10px',
+                      border: '2px solid #1e293b',
+                      fontSize: '15px',
+                      fontFamily: "'Inter', sans-serif",
+                      backgroundColor: '#ffffff'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Age field */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '14px', color: '#1e293b' }}>Age</label>
+                <div style={{ position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '14px', top: '12px', color: '#1e293b' }}>
+                    <svg width="18" height="18" viewBox="0 0 32 32" fill="none">
+                      <rect x="8" y="10" width="16" height="16" rx="2" fill="#ffffff" stroke="currentColor" strokeWidth="2" />
+                      <rect x="12" y="6" width="2" height="4" fill="currentColor" />
+                      <rect x="18" y="6" width="2" height="4" fill="currentColor" />
+                      <rect x="12" y="14" width="8" height="2" fill="currentColor" />
+                    </svg>
+                  </span>
+                  <input 
+                    type="number" 
+                    min="12"
+                    max="120"
+                    value={userAge}
+                    onChange={(e) => setUserAge(e.target.value)}
+                    placeholder="25"
                     required
                     style={{
                       width: '100%',
