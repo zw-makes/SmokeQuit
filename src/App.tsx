@@ -340,6 +340,7 @@ function App() {
   const [lastSelectedPoison, setLastSelectedPoison] = useState<'cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe'>('cigarette');
   const [poisonSubStep, setPoisonSubStep] = useState(0);
   const [age, setAge] = useState(25);
+  const [addictionLevel, setAddictionLevel] = useState<'casual' | 'moderate' | 'full'>('moderate');
 
   // Staggered element revealing state for onboarding quote slides
   const [revealedElements, setRevealedElements] = useState(0);
@@ -509,6 +510,29 @@ function App() {
     }));
   };
 
+  const handleSelectAddictionLevel = (level: 'casual' | 'moderate' | 'full') => {
+    setAddictionLevel(level);
+    setPoisonsHabits(prev => {
+      const updated = { ...prev };
+      Object.keys(updated).forEach((poisonId) => {
+        const config = getPoisonConfigById(poisonId);
+        let dailyVal = 10;
+        if (level === 'casual') {
+          dailyVal = Math.max(1, Math.round(config.maxDaily * 0.15));
+        } else if (level === 'moderate') {
+          dailyVal = Math.round((config.minDaily + config.maxDaily) / 2);
+        } else {
+          dailyVal = config.maxDaily;
+        }
+        updated[poisonId] = {
+          ...updated[poisonId],
+          daily: dailyVal
+        };
+      });
+      return updated;
+    });
+  };
+
   // User Profile inputs
   const [quitDate, setQuitDate] = useState(() => {
     const today = new Date();
@@ -569,7 +593,7 @@ function App() {
 
   // Live Stats calculations (run every second on the dashboard)
   useEffect(() => {
-    if (step !== 5) return;
+    if (step !== 6) return;
 
     const calculateStats = () => {
       const quitDateTime = new Date(`${quitDate}T${quitTime}`);
@@ -616,7 +640,7 @@ function App() {
   }, [step, quitDate, quitTime, poisonsHabits, selectedPoisons]);
 
   const handleNext = () => {
-    if (step < 5) setStep(step + 1);
+    if (step < 6) setStep(step + 1);
   };
 
   const handleBack = () => {
@@ -654,7 +678,7 @@ function App() {
               <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '24px', height: '24px', borderRadius: '6px' }} />
               Suu<span>Quit</span>
             </div>
-            {((step > 2 && step < 5) || (step === 1 && poisonSubStep === 1)) && (
+            {((step > 2 && step < 6) || (step === 1 && poisonSubStep === 1)) && (
               <button className="btn-secondary" style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', width: 'auto' }} onClick={handleBack}>
                 Back
               </button>
@@ -922,6 +946,7 @@ function App() {
                 <div className="bullet active"></div>
                 <div className="bullet"></div>
                 <div className="bullet"></div>
+                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
                 Get Started <ArrowRight size={18} />
@@ -973,6 +998,7 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet active"></div>
                 <div className="bullet"></div>
+                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
                 Continue <ArrowRight size={18} />
@@ -983,18 +1009,46 @@ function App() {
           {/* SLIDE 4: Onboarding Setup */}
           <div className={`slide ${step === 4 ? 'slide-active' : step < 4 ? 'slide-next' : 'slide-prev'}`}>
             <div className="slide-header">
-              <h1 className="slide-title">Setup <span className="slide-title-gradient">Goal</span></h1>
-              <p className="slide-subtitle">Enter your smoking habits so we can calculate your savings and health improvements.</p>
+              <h1 className="slide-title" style={{ fontSize: '24px', lineHeight: '1.25' }}>
+                As a friend… how many a day?<br />
+                <span className="slide-title-gradient">Casual or full addiction?</span>
+              </h1>
+              <p className="slide-subtitle">Choose your general addiction level, then fine-tune details below.</p>
             </div>
 
             <div className="glass-card" style={{ padding: '18px', maxHeight: '380px', overflowY: 'auto' }}>
+              {/* Addiction selector cards */}
+              <div className="addiction-options" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '18px' }}>
+                {[
+                  { id: 'casual', label: 'Casual', desc: 'Social/Light' },
+                  { id: 'moderate', label: 'Moderate', desc: 'Habitual' },
+                  { id: 'full', label: 'Addicted', desc: 'Heavy Use' }
+                ].map((level) => (
+                  <div 
+                    key={level.id}
+                    className={`addiction-card ${addictionLevel === level.id ? 'active' : ''}`}
+                    onClick={async () => {
+                      handleSelectAddictionLevel(level.id as any);
+                      try {
+                        await Haptics.impact({ style: ImpactStyle.Light });
+                      } catch (e) {
+                        if (navigator.vibrate) navigator.vibrate(20);
+                      }
+                    }}
+                  >
+                    <span className="addiction-label">{level.label}</span>
+                    <span className="addiction-desc">{level.desc}</span>
+                  </div>
+                ))}
+              </div>
+
               <div className="setup-form">
                 {selectedPoisons.map((poisonId) => {
                   const config = getPoisonConfigById(poisonId);
                   const habit = poisonsHabits[poisonId];
                   return (
                     <div key={poisonId} style={{ borderBottom: selectedPoisons.length > 1 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingBottom: '16px', marginBottom: '16px' }}>
-                      <h3 style={{ fontSize: '15px', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <h3 style={{ fontSize: '14px', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         {poisonId === 'cigarette' && <PixelCigarette size={24} />}
                         {poisonId === 'cigar' && <PixelCigar size={24} />}
                         {poisonId === 'vape' && <PixelVape size={24} />}
@@ -1065,15 +1119,54 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet"></div>
                 <div className="bullet active"></div>
+                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
-                Create Dashboard <Sparkles size={18} />
+                Continue <ArrowRight size={18} />
               </button>
             </div>
           </div>
 
-          {/* SLIDE 5: Dashboard Mockup */}
-          <div className={`slide ${step === 5 ? 'slide-active' : 'slide-next'}`}>
+          {/* SLIDE 5: Onboarding Commitment Screen */}
+          <div className={`slide ${step === 5 ? 'slide-active' : step < 5 ? 'slide-next' : 'slide-prev'}`}>
+            <div className="slide-header" style={{ marginTop: '20px' }}>
+              <h1 className="slide-title">Ready to <span className="slide-title-gradient">Commit</span>?</h1>
+              <p className="slide-subtitle" style={{ fontSize: '17px', color: 'var(--text-primary)', fontWeight: '600', marginTop: '16px', lineHeight: '1.4' }}>
+                "So, are you ready to start this quit journey with me?"
+              </p>
+            </div>
+
+            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
+              <div className="breathing-container" style={{ height: '180px', margin: '10px 0' }}>
+                <div className="breathing-circle-outer" style={{ width: '130px', height: '130px', animationDuration: '3s' }}>
+                  <div className="breathing-circle-inner" style={{ width: '90px', height: '90px', boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)', background: 'linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-tertiary) 100%)' }}>
+                    <Heart size={36} fill="#ffffff" stroke="none" className="arrow-bounce" style={{ animationDuration: '1.5s' }} />
+                  </div>
+                </div>
+              </div>
+
+              <div className="glass-card" style={{ padding: '16px 20px', width: '100%', textAlign: 'center', border: '1px solid rgba(168, 85, 247, 0.2)' }}>
+                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
+                  🤝 <strong>No one quits alone.</strong> By starting this, you join our supportive network of friends lifting each other up. Your lungs start repairing the very second we lock this in.
+                </p>
+              </div>
+            </div>
+
+            <div className="bottom-nav">
+              <div className="bullets-container">
+                <div className="bullet"></div>
+                <div className="bullet"></div>
+                <div className="bullet"></div>
+                <div className="bullet active"></div>
+              </div>
+              <button className="btn-primary" onClick={handleNext} style={{ background: 'linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-tertiary) 100%)', boxShadow: '0 8px 20px rgba(244, 63, 94, 0.25)' }}>
+                Yes, I'm Ready! <Sparkles size={18} />
+              </button>
+            </div>
+          </div>
+
+          {/* SLIDE 6: Dashboard Mockup */}
+          <div className={`slide ${step === 6 ? 'slide-active' : 'slide-next'}`}>
             <div className="slide-header">
               <p style={{ color: 'var(--accent-primary)', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Your Live Dashboard</p>
               <h1 className="slide-title" style={{ fontSize: '28px', marginBottom: '4px' }}>Clean Progress</h1>
@@ -1192,7 +1285,11 @@ function App() {
                 }}>
                   <Share2 size={16} /> Share
                 </button>
-                <button className="btn-primary" style={{ padding: '12px' }} onClick={() => setStep(0)}>
+                <button className="btn-primary" style={{ padding: '12px' }} onClick={() => {
+                  setStep(0);
+                  setPoisonSubStep(0);
+                  setAddictionLevel('moderate');
+                }}>
                   Restart Setup
                 </button>
               </div>
