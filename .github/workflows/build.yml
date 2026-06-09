@@ -16,40 +16,38 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    - name: Install XcodeGen
-      run: brew install xcodegen
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: 'npm'
 
-    - name: Generate PNG Launch Images
-      run: python3 scripts/generate_launch_images.py
+    - name: Install dependencies
+      run: npm install
 
-    - name: Generate Xcode Project
-      run: xcodegen generate
+    - name: Build Web Application
+      run: npm run build
 
-    - name: Build Application
+    - name: Sync Capacitor iOS Platform
       run: |
-        xcodebuild -project SmokeQuit.xcodeproj \
-                   -scheme SmokeQuit \
+        npx cap sync ios
+
+    - name: Build Xcode Project
+      run: |
+        xcodebuild -workspace ios/App/App.xcworkspace \
+                   -scheme App \
                    -configuration Release \
                    -sdk iphoneos \
-                   -derivedDataPath build \
-                   ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME=LaunchImage \
+                   -derivedDataPath ios/App/build \
                    CODE_SIGNING_ALLOWED=NO \
                    CODE_SIGNING_REQUIRED=NO \
                    CODE_SIGN_IDENTITY="" \
                    clean build
 
-    - name: Verify compiled Info.plist
-      run: |
-        APP_PATH="build/Build/Products/Release-iphoneos/SmokeQuit.app"
-        echo "=== FULL compiled Info.plist ==="
-        plutil -p "$APP_PATH/Info.plist"
-        echo "=== Launch files in bundle ==="
-        ls "$APP_PATH/" | grep -i "launch\|default" || echo "No launch files found"
-
     - name: Package IPA
       run: |
         mkdir -p Payload
-        cp -r build/Build/Products/Release-iphoneos/SmokeQuit.app Payload/
+        cp -r ios/App/build/Build/Products/Release-iphoneos/App.app Payload/
         zip -r SmokeQuit.ipa Payload
 
     - name: Upload IPA Artifact

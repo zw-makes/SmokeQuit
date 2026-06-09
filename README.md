@@ -1,64 +1,73 @@
-# SmokeQuit iOS App
+# React + TypeScript + Vite
 
-A native iOS app designed to help you and your friends quit smoking. Built with Swift/SwiftUI and styled with premium, modern dark aesthetics.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
----
+Currently, two official plugins are available:
 
-## How it works (No Mac Required)
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-This repository is configured to compile your iOS app for free using **GitHub Actions** (macOS runners hosted by GitHub). The build process will produce an unsigned `.ipa` file that you can download directly to your Windows computer and sideload onto your iPhone using **Sideloadly**.
+## React Compiler
 
----
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-## Step 1: Create a GitHub Repository & Push this Code
+## Expanding the ESLint configuration
 
-To trigger the automated compiler:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-1. **Initialize Git** in this directory:
-   ```bash
-   git init
-   ```
-2. **Commit all files**:
-   ```bash
-   git add .
-   git commit -m "Initial commit of SmokeQuit App"
-   ```
-3. **Create a new repository** on GitHub (do not initialize with README, license, or gitignore).
-4. **Link and push** to your new repository:
-   ```bash
-   git branch -M main
-   git remote add origin https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
-   git push -u origin main
-   ```
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
 
----
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
 
-## Step 2: Download the Compiled IPA
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
 
-1. Navigate to your repository on GitHub.
-2. Click on the **Actions** tab at the top.
-3. Select the run named **Build iOS App** (it triggers automatically upon push).
-4. Wait about **2-3 minutes** for the workflow to complete.
-5. Scroll down to the **Artifacts** section at the bottom of the run page.
-6. Click on **SmokeQuit-Unsigned-IPA** to download the zip file.
-7. Extract the downloaded zip file to get `SmokeQuit.ipa`.
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
----
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
 
-## Step 3: Sideload onto Your iPhone with Sideloadly
-
-Since the `.ipa` is unsigned, Sideloadly will sign it with your own Apple ID.
-
-1. Download and install **Sideloadly** on your Windows PC (if you haven't already) from [sideloadly.io](https://sideloadly.io/).
-2. Make sure you have **iTunes** and **iCloud** installed on your PC (download the official desktop installers, not the Microsoft Store versions).
-3. Connect your iPhone to your PC via a USB cable. (Tap "Trust" on your iPhone if prompted).
-4. Open **Sideloadly**:
-   - Your device should be auto-detected in the **Device** list.
-   - Enter your **Apple ID** (the email associated with your iCloud account) under the Apple Account field.
-5. Drag and drop the `SmokeQuit.ipa` file into the large IPA icon area on Sideloadly.
-6. Click **Start**.
-7. If prompted, enter your Apple ID password and 2-Factor Authentication code. (Sideloadly uses this securely to request a free development certificate from Apple).
-8. Once the status shows **Done**, the app icon will appear on your iPhone home screen!
-9. Before opening the app, go to **Settings > General > VPN & Device Management** on your iPhone, tap your developer certificate (your Apple ID), and select **Trust**.
-10. Turn on **Developer Mode** on your iPhone if required by iOS (usually found in **Settings > Privacy & Security > Developer Mode**). Restart your phone to apply.
-11. Launch the **SmokeQuit** app and breathe free!
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
+```
