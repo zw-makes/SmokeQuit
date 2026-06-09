@@ -901,4 +901,37 @@ body {
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
 }
 
+.app-shell.theme-cream .range-slider.age-slider {
+  background: rgba(0, 0, 0, 0.08) !important;
+  height: 8px;
+  margin: 15px 0;
+}
+
+.app-shell.theme-cream .range-slider.age-slider::-webkit-slider-thumb {
+  background: #000000 !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25) !important;
+  width: 24px;
+  height: 24px;
+}
+
+.age-wise-text {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  border-radius: 18px;
+  padding: 14px 18px;
+  box-sizing: border-box;
+  text-align: center;
+  color: #374151;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02);
+  margin-top: 10px;
+  min-height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-style: italic;
+}
+
 

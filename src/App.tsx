@@ -257,9 +257,89 @@ const PixelArrow = () => (
   </svg>
 );
 
+// Age Reaction Pixel Art Icons
+const PixelSkateboard = ({ size = 80 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    <rect className="smoke-p1" x="22" y="6" width="2" height="2" fill="#facc15" opacity="0.8" />
+    <rect className="smoke-p2" x="8" y="8" width="2" height="2" fill="#ef4444" opacity="0.6" />
+    <rect x="5" y="14" width="2" height="2" fill="#14b8a6" />
+    <rect x="7" y="15" width="2" height="2" fill="#0d9488" />
+    <rect x="9" y="16" width="14" height="2" fill="#14b8a6" />
+    <rect x="9" y="17" width="14" height="1" fill="#0d9488" />
+    <rect x="11" y="16" width="10" height="1" fill="#facc15" />
+    <rect x="23" y="15" width="2" height="2" fill="#10b981" />
+    <rect x="25" y="14" width="2" height="2" fill="#059669" />
+    <rect x="9" y="18" width="2" height="1" fill="#4b5563" />
+    <rect x="21" y="18" width="2" height="1" fill="#4b5563" />
+    <rect x="8" y="19" width="3" height="3" fill="#334155" rx="0.5" />
+    <rect x="9" y="20" width="1" height="1" fill="#9ca3af" />
+    <rect x="20" y="19" width="3" height="3" fill="#334155" rx="0.5" />
+    <rect x="21" y="20" width="1" height="1" fill="#9ca3af" />
+  </svg>
+);
+
+const PixelCoffeeMug = ({ size = 80 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    <rect className="smoke-p1" x="12" y="6" width="2" height="3" fill="#9ca3af" opacity="0.6" />
+    <rect className="smoke-p2" x="16" y="4" width="2" height="3" fill="#d1d5db" opacity="0.4" />
+    <rect className="smoke-p3" x="14" y="2" width="2" height="3" fill="#e5e7eb" opacity="0.2" />
+    <rect x="9" y="12" width="12" height="13" fill="#ec4899" rx="1" />
+    <rect x="10" y="13" width="2" height="11" fill="#f472b6" />
+    <rect x="10" y="13" width="10" height="1" fill="#f472b6" />
+    <rect x="21" y="15" width="3" height="2" fill="#ec4899" />
+    <rect x="23" y="17" width="2" height="4" fill="#ec4899" />
+    <rect x="21" y="21" width="3" height="2" fill="#ec4899" />
+  </svg>
+);
+
+const PixelHourglass = ({ size = 80 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    <rect x="8" y="6" width="16" height="2" fill="#b45309" />
+    <rect x="8" y="24" width="16" height="2" fill="#b45309" />
+    <rect x="8" y="8" width="2" height="16" fill="#78350f" />
+    <rect x="22" y="8" width="2" height="16" fill="#78350f" />
+    <rect x="11" y="8" width="10" height="1" fill="#e2e8f0" />
+    <rect x="12" y="9" width="8" height="2" fill="#cbd5e1" opacity="0.6" />
+    <rect x="13" y="11" width="6" height="2" fill="#cbd5e1" opacity="0.6" />
+    <rect x="14" y="13" width="4" height="2" fill="#94a3b8" />
+    <rect x="14" y="17" width="4" height="2" fill="#94a3b8" />
+    <rect x="13" y="19" width="6" height="2" fill="#cbd5e1" opacity="0.6" />
+    <rect x="12" y="21" width="8" height="2" fill="#cbd5e1" opacity="0.6" />
+    <rect x="11" y="23" width="10" height="1" fill="#e2e8f0" />
+    <rect x="13" y="9" width="6" height="2" fill="#f97316" />
+    <rect x="14" y="11" width="4" height="1" fill="#f97316" />
+    <rect x="15" y="12" width="2" height="1" fill="#facc15" />
+    <rect className="smoke-p1" x="15" y="13" width="2" height="6" fill="#facc15" />
+    <rect x="15" y="19" width="2" height="1" fill="#f97316" />
+    <rect x="14" y="20" width="4" height="2" fill="#f97316" />
+    <rect x="12" y="22" width="8" height="1" fill="#f97316" />
+    <rect x="12" y="23" width="8" height="1" fill="#facc15" />
+  </svg>
+);
+
+const PixelMedal = ({ size = 80 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+    <rect x="11" y="5" width="4" height="7" fill="#3b82f6" />
+    <rect x="15" y="5" width="2" height="7" fill="#ffffff" />
+    <rect x="17" y="5" width="4" height="7" fill="#ef4444" />
+    <rect x="12" y="11" width="3" height="3" fill="#2563eb" />
+    <rect x="17" y="11" width="3" height="3" fill="#dc2626" />
+    <circle cx="16" cy="20" r="7" fill="#eab308" />
+    <circle cx="16" cy="20" r="6" fill="#facc15" />
+    <rect x="15" y="17" width="2" height="2" fill="#ffffff" />
+    <rect x="14" y="19" width="4" height="2" fill="#ffffff" />
+    <rect x="15" y="21" width="2" height="2" fill="#ffffff" />
+    <rect x="13" y="20" width="6" height="1" fill="#ffffff" />
+    <rect x="13" y="16" width="1" height="1" fill="#ffffff" />
+  </svg>
+);
+
 function App() {
   const [step, setStep] = useState(0);
-  const [selectedPoison, setSelectedPoison] = useState<'cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe'>('cigarette');
+  const [selectedPoisons, setSelectedPoisons] = useState<('cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe')[]>(['cigarette']);
+  const [lastSelectedPoison, setLastSelectedPoison] = useState<'cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe'>('cigarette');
+  const [poisonSubStep, setPoisonSubStep] = useState(0);
+  const [age, setAge] = useState(25);
 
   // Staggered element revealing state for onboarding quote slides
   const [revealedElements, setRevealedElements] = useState(0);
@@ -338,10 +418,10 @@ function App() {
     return () => {
       timers.forEach((t) => clearTimeout(t));
     };
-  }, [step]);
+  }, [step, poisonSubStep]);
 
-  const getPoisonConfig = () => {
-    switch (selectedPoison) {
+  const getPoisonConfigById = (id: string) => {
+    switch (id) {
       case 'cigar':
         return {
           labelDaily: 'Cigars smoked per day',
@@ -383,7 +463,7 @@ function App() {
           unitPlural: 'bowls',
           minDaily: 1,
           maxDaily: 15,
-          divisor: 30, // pouch pouch has ~30 bowls on average
+          divisor: 30, // pouch has ~30 bowls on average
           avoidedLabel: 'Bowls Avoided'
         };
       case 'cigarette':
@@ -401,38 +481,35 @@ function App() {
     }
   };
 
-  const poisonConfig = getPoisonConfig();
+  const [poisonsHabits, setPoisonsHabits] = useState<Record<string, { daily: number; cost: number }>>({
+    cigarette: { daily: 15, cost: 12 },
+    cigar: { daily: 1, cost: 15 },
+    vape: { daily: 2, cost: 10 },
+    hookah: { daily: 2, cost: 8 },
+    pipe: { daily: 3, cost: 18 }
+  });
 
-  // Update defaults when selected poison changes
-  useEffect(() => {
-    switch (selectedPoison) {
-      case 'cigar':
-        setCigarettesPerDay(1);
-        setCostPerPack(15);
-        break;
-      case 'vape':
-        setCigarettesPerDay(2); // 2 pods per week
-        setCostPerPack(10);
-        break;
-      case 'hookah':
-        setCigarettesPerDay(2); // 2 sessions per week
-        setCostPerPack(8);
-        break;
-      case 'pipe':
-        setCigarettesPerDay(3); // 3 bowls per day
-        setCostPerPack(18); // per tobacco pouch
-        break;
-      case 'cigarette':
-      default:
-        setCigarettesPerDay(15);
-        setCostPerPack(12);
-        break;
-    }
-  }, [selectedPoison]);
+  const updateHabitDaily = (poisonId: string, value: number) => {
+    setPoisonsHabits(prev => ({
+      ...prev,
+      [poisonId]: {
+        ...prev[poisonId],
+        daily: value
+      }
+    }));
+  };
+
+  const updateHabitCost = (poisonId: string, value: number) => {
+    setPoisonsHabits(prev => ({
+      ...prev,
+      [poisonId]: {
+        ...prev[poisonId],
+        cost: value
+      }
+    }));
+  };
 
   // User Profile inputs
-  const [cigarettesPerDay, setCigarettesPerDay] = useState(15);
-  const [costPerPack, setCostPerPack] = useState(12);
   const [quitDate, setQuitDate] = useState(() => {
     const today = new Date();
     // Default to yesterday so they immediately see some "smoke-free" time elapsed
@@ -510,13 +587,23 @@ function App() {
 
       if (isPast) {
         const totalDays = absDiff / (1000 * 60 * 60 * 24);
-        const config = getPoisonConfig();
-        const unitsAvoided = totalDays * (selectedPoison === 'vape' || selectedPoison === 'hookah' ? cigarettesPerDay / 7 : cigarettesPerDay);
-        const moneySaved = (unitsAvoided / config.divisor) * costPerPack;
+        let totalSaved = 0;
+        let totalAvoided = 0;
+
+        selectedPoisons.forEach((poisonId) => {
+          const config = getPoisonConfigById(poisonId);
+          const habit = poisonsHabits[poisonId];
+          const dailyQuantity = (poisonId === 'vape' || poisonId === 'hookah') ? habit.daily / 7 : habit.daily;
+          const unitsAvoided = totalDays * dailyQuantity;
+          const moneySaved = (unitsAvoided / config.divisor) * habit.cost;
+
+          totalSaved += moneySaved;
+          totalAvoided += unitsAvoided;
+        });
 
         setStats({
-          saved: parseFloat(moneySaved.toFixed(2)),
-          avoided: Math.floor(unitsAvoided)
+          saved: parseFloat(totalSaved.toFixed(2)),
+          avoided: Math.floor(totalAvoided)
         });
       } else {
         setStats({ saved: 0, avoided: 0 });
@@ -526,14 +613,27 @@ function App() {
     calculateStats();
     const timer = setInterval(calculateStats, 1000);
     return () => clearInterval(timer);
-  }, [step, quitDate, quitTime, cigarettesPerDay, costPerPack, selectedPoison]);
+  }, [step, quitDate, quitTime, poisonsHabits, selectedPoisons]);
 
   const handleNext = () => {
     if (step < 5) setStep(step + 1);
   };
 
   const handleBack = () => {
-    if (step > 1) setStep(step - 1);
+    if (step === 1 && poisonSubStep === 1) {
+      setPoisonSubStep(0);
+    } else if (step > 1) {
+      setStep(step - 1);
+    }
+  };
+
+  const handleNextPills = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (poisonSubStep === 0) {
+      setPoisonSubStep(1);
+    } else {
+      setStep(2);
+    }
   };
 
   return (
@@ -548,13 +648,13 @@ function App() {
 
       <div className="app-content">
         {/* Navigation Header */}
-        {step > 1 && (
+        {step >= 1 && (
           <header className="app-header">
             <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
               <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '24px', height: '24px', borderRadius: '6px' }} />
               Suu<span>Quit</span>
             </div>
-            {step > 2 && step < 5 && (
+            {((step > 2 && step < 5) || (step === 1 && poisonSubStep === 1)) && (
               <button className="btn-secondary" style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', width: 'auto' }} onClick={handleBack}>
                 Back
               </button>
@@ -638,62 +738,124 @@ function App() {
             {/* Header / Question 1 */}
             <div style={{ padding: '0 24px', marginTop: '24px', width: '100%', zIndex: 10 }}>
               <div className={`poison-question-1 slide-up-item ${revealedElements >= 1 ? 'visible' : ''}`}>
-                So… you're the brave one who's actually gonna quit smoking?
+                {poisonSubStep === 0 
+                  ? "So… you're the brave one who's actually gonna quit smoking?" 
+                  : "Btw, How old are you?"
+                }
               </div>
             </div>
 
             {/* Question 2 & Selection Area */}
             <div style={{ flex: 1, display: 'flex', flexDirection: 'column', width: '100%', padding: '0 24px', marginTop: '16px', justifyContent: 'center', zIndex: 10 }}>
               
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px', width: '100%' }}>
-                <div className={`poison-question-2 slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`}>
-                  What's your poison?
-                </div>
-                
-                {/* Dynamically changing SVG based on selection */}
-                <div className={`poison-image-container pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
-                  {selectedPoison === 'cigarette' && <PixelCigarette size={100} />}
-                  {selectedPoison === 'cigar' && <PixelCigar size={100} />}
-                  {selectedPoison === 'vape' && <PixelVape size={100} />}
-                  {selectedPoison === 'hookah' && <PixelHookah size={100} />}
-                  {selectedPoison === 'pipe' && <PixelPipe size={100} />}
-                </div>
-              </div>
-
-              {/* List of Options */}
-              <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
-                {[
-                  { id: 'cigarette', label: 'Cigarettes', icon: <PixelCigarette size={40} /> },
-                  { id: 'cigar', label: 'Cigars', icon: <PixelCigar size={40} /> },
-                  { id: 'vape', label: 'Vapes / E-Cigs', icon: <PixelVape size={40} /> },
-                  { id: 'hookah', label: 'Hookah / Shisha', icon: <PixelHookah size={40} /> },
-                  { id: 'pipe', label: 'Pipe Tobacco', icon: <PixelPipe size={40} /> }
-                ].map((option) => (
-                  <div 
-                    key={option.id}
-                    className={`poison-option-item ${selectedPoison === option.id ? 'active' : ''}`}
-                    onClick={async () => {
-                      setSelectedPoison(option.id as any);
-                      try {
-                        await Haptics.impact({ style: ImpactStyle.Light });
-                      } catch (e) {
-                        if (navigator.vibrate) navigator.vibrate(20);
-                      }
-                    }}
-                    style={{ justifyContent: 'space-between', alignItems: 'center' }}
-                  >
-                    <span>{option.label}</span>
-                    <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
-                      {option.icon}
+              {poisonSubStep === 0 ? (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px', width: '100%' }}>
+                    <div className={`poison-question-2 slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                      What's your poison?
+                    </div>
+                    
+                    {/* Dynamically changing SVG based on selection */}
+                    <div className={`poison-image-container pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                      {lastSelectedPoison === 'cigarette' && <PixelCigarette size={100} />}
+                      {lastSelectedPoison === 'cigar' && <PixelCigar size={100} />}
+                      {lastSelectedPoison === 'vape' && <PixelVape size={100} />}
+                      {lastSelectedPoison === 'hookah' && <PixelHookah size={100} />}
+                      {lastSelectedPoison === 'pipe' && <PixelPipe size={100} />}
                     </div>
                   </div>
-                ))}
-              </div>
+
+                  {/* List of Options */}
+                  <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
+                    {[
+                      { id: 'cigarette', label: 'Cigarettes', icon: <PixelCigarette size={40} /> },
+                      { id: 'cigar', label: 'Cigars', icon: <PixelCigar size={40} /> },
+                      { id: 'vape', label: 'Vapes / E-Cigs', icon: <PixelVape size={40} /> },
+                      { id: 'hookah', label: 'Hookah / Shisha', icon: <PixelHookah size={40} /> },
+                      { id: 'pipe', label: 'Pipe Tobacco', icon: <PixelPipe size={40} /> }
+                    ].map((option) => (
+                      <div 
+                        key={option.id}
+                        className={`poison-option-item ${selectedPoisons.includes(option.id as any) ? 'active' : ''}`}
+                        onClick={async () => {
+                          let newPoisons = [...selectedPoisons];
+                          if (newPoisons.includes(option.id as any)) {
+                            if (newPoisons.length > 1) {
+                              newPoisons = newPoisons.filter((p) => p !== option.id);
+                            }
+                          } else {
+                            newPoisons.push(option.id as any);
+                          }
+                          setSelectedPoisons(newPoisons);
+                          setLastSelectedPoison(option.id as any);
+
+                          try {
+                            await Haptics.impact({ style: ImpactStyle.Light });
+                          } catch (e) {
+                            if (navigator.vibrate) navigator.vibrate(20);
+                          }
+                        }}
+                        style={{ justifyContent: 'space-between', alignItems: 'center' }}
+                      >
+                        <span>{option.label}</span>
+                        <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                          {option.icon}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : (
+                <>
+                  <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px', width: '100%' }}>
+                    <div className={`poison-question-2 slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                      Select your age
+                    </div>
+                    
+                    {/* Dynamically changing SVG based on selected age */}
+                    <div className={`poison-image-container pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
+                      {age < 20 && <PixelSkateboard size={100} />}
+                      {age >= 20 && age <= 29 && <PixelCoffeeMug size={100} />}
+                      {age >= 30 && age <= 49 && <PixelHourglass size={100} />}
+                      {age >= 50 && <PixelMedal size={100} />}
+                    </div>
+                  </div>
+
+                  {/* Age Selector input slider */}
+                  <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`} style={{ width: '100%' }}>
+                    <div className="input-group" style={{ padding: '0 4px' }}>
+                      <input 
+                        type="range" 
+                        min="12" 
+                        max="90" 
+                        value={age} 
+                        onChange={(e) => setAge(parseInt(e.target.value))}
+                        className="range-slider age-slider"
+                      />
+                      <div className="slider-val" style={{ margin: '8px 0 20px 0' }}>
+                        <span>12 yrs</span>
+                        <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '18px' }}>
+                          {age} years old
+                        </span>
+                        <span>90 yrs</span>
+                      </div>
+                      
+                      {/* Wise/encouraging age reaction message */}
+                      <div className="age-wise-text">
+                        {age < 20 && "🛹 Rad! Quitting now keeps you active, fit, and in control of your future."}
+                        {age >= 20 && age <= 29 && "☕ Starting your career and life with clean lungs is the best investment."}
+                        {age >= 30 && age <= 49 && "⏳ Time to focus on longevity. Your body recovery starts the moment you stop."}
+                        {age >= 50 && "🏅 Truly inspiring. It is never too late to reclaim your health and wisdom."}
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
 
               {/* Pill Pack Button & Pointing Arrow + Aligned Click Helper (Slide 1) */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 20, marginTop: '8px' }}>
                 <div className={`click-helper ${revealedElements >= 4 ? 'visible' : ''}`} style={{ position: 'static', padding: 0 }}>
-                  Tap the pills to continue
+                  {poisonSubStep === 0 ? "Tap the pills to continue" : "Tap the pills to save profile"}
                 </div>
                 <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
@@ -701,10 +863,7 @@ function App() {
                   </div>
                   <div 
                     className="pixel-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      setStep(2);
-                    }}
+                    onClick={handleNextPills}
                     style={{ transform: 'rotate(-15deg)' }}
                   >
                     <div className="pixel-btn-hover-wrap">
@@ -828,42 +987,58 @@ function App() {
               <p className="slide-subtitle">Enter your smoking habits so we can calculate your savings and health improvements.</p>
             </div>
 
-            <div className="glass-card" style={{ padding: '18px' }}>
+            <div className="glass-card" style={{ padding: '18px', maxHeight: '380px', overflowY: 'auto' }}>
               <div className="setup-form">
-                <div className="input-group">
-                  <label className="input-label">{poisonConfig.labelDaily}</label>
-                  <input 
-                    type="range" 
-                    min={poisonConfig.minDaily} 
-                    max={poisonConfig.maxDaily} 
-                    value={cigarettesPerDay} 
-                    onChange={(e) => setCigarettesPerDay(parseInt(e.target.value))}
-                    className="range-slider"
-                  />
-                  <div className="slider-val">
-                    <span>{poisonConfig.minDaily} {poisonConfig.unitSingular}</span>
-                    <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>
-                      {cigarettesPerDay} {cigarettesPerDay === 1 ? poisonConfig.unitSingular : poisonConfig.unitPlural}
-                    </span>
-                    <span>{poisonConfig.maxDaily} {poisonConfig.unitPlural}</span>
-                  </div>
-                </div>
+                {selectedPoisons.map((poisonId) => {
+                  const config = getPoisonConfigById(poisonId);
+                  const habit = poisonsHabits[poisonId];
+                  return (
+                    <div key={poisonId} style={{ borderBottom: selectedPoisons.length > 1 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingBottom: '16px', marginBottom: '16px' }}>
+                      <h3 style={{ fontSize: '15px', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        {poisonId === 'cigarette' && <PixelCigarette size={24} />}
+                        {poisonId === 'cigar' && <PixelCigar size={24} />}
+                        {poisonId === 'vape' && <PixelVape size={24} />}
+                        {poisonId === 'hookah' && <PixelHookah size={24} />}
+                        {poisonId === 'pipe' && <PixelPipe size={24} />}
+                        {config.unitPlural} details
+                      </h3>
+                      <div className="input-group">
+                        <label className="input-label">{config.labelDaily}</label>
+                        <input 
+                          type="range" 
+                          min={config.minDaily} 
+                          max={config.maxDaily} 
+                          value={habit.daily} 
+                          onChange={(e) => updateHabitDaily(poisonId, parseInt(e.target.value))}
+                          className="range-slider"
+                        />
+                        <div className="slider-val">
+                          <span>{config.minDaily} {config.unitSingular}</span>
+                          <span style={{ color: 'var(--accent-primary)', fontWeight: 'bold' }}>
+                            {habit.daily} {habit.daily === 1 ? config.unitSingular : config.unitPlural}
+                          </span>
+                          <span>{config.maxDaily} {config.unitPlural}</span>
+                        </div>
+                      </div>
 
-                <div className="input-group">
-                  <label className="input-label">{poisonConfig.labelCost}</label>
-                  <div style={{ position: 'relative' }}>
-                    <span style={{ position: 'absolute', left: '16px', top: '14px', color: 'var(--text-muted)' }}>$</span>
-                    <input 
-                      type="number" 
-                      min="1" 
-                      max="1000" 
-                      value={costPerPack} 
-                      onChange={(e) => setCostPerPack(parseFloat(e.target.value) || 0)}
-                      className="input-control"
-                      style={{ paddingLeft: '32px', width: '100%' }}
-                    />
-                  </div>
-                </div>
+                      <div className="input-group" style={{ marginTop: '12px' }}>
+                        <label className="input-label">{config.labelCost}</label>
+                        <div style={{ position: 'relative' }}>
+                          <span style={{ position: 'absolute', left: '16px', top: '14px', color: 'var(--text-muted)' }}>$</span>
+                          <input 
+                            type="number" 
+                            min="1" 
+                            max="1000" 
+                            value={habit.cost} 
+                            onChange={(e) => updateHabitCost(poisonId, parseFloat(e.target.value) || 0)}
+                            className="input-control"
+                            style={{ paddingLeft: '32px', width: '100%' }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })}
 
                 <div className="input-group">
                   <label className="input-label">Quit Date & Time</label>
@@ -932,7 +1107,11 @@ function App() {
                     <CheckCircle2 size={18} />
                   </div>
                   <div className="stat-num">{stats.avoided}</div>
-                  <div className="stat-label">{poisonConfig.avoidedLabel}</div>
+                  <div className="stat-label">
+                    {selectedPoisons.length === 1 
+                      ? getPoisonConfigById(selectedPoisons[0]).avoidedLabel 
+                      : "Total Avoided"}
+                  </div>
                 </div>
               </div>
 
