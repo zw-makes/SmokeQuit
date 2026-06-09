@@ -800,8 +800,12 @@ function App() {
   };
 
   const handleBack = () => {
-    if (step === 1 && poisonSubStep > 0) {
-      setPoisonSubStep(poisonSubStep - 1);
+    if (step === 1) {
+      if (poisonSubStep > 0) {
+        setPoisonSubStep(poisonSubStep - 1);
+      } else {
+        setStep(0);
+      }
     } else if (step === 2) {
       setStep(1);
       setPoisonSubStep(3);
@@ -865,8 +869,8 @@ function App() {
               </button>
             )}
 
-            {/* Back button for Step 1 (poison sub-steps > 0) and Step 2 (Welcome screen) */}
-            {((step === 2) || (step === 1 && poisonSubStep > 0)) && (
+            {/* Back button for Step 1 (poison selection & sub-steps) and Step 2 (Welcome screen) */}
+            {((step === 2) || (step === 1 && poisonSubStep >= 0)) && (
               <button 
                 className="btn-secondary" 
                 style={{ 
