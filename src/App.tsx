@@ -803,13 +803,13 @@ function App() {
         {/* Navigation Header */}
         {step >= 1 && (
           <header className="app-header">
-            <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
-              <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '24px', height: '24px', borderRadius: '6px' }} />
-              Suu<span>Quit</span>
+            <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
+              <span style={{ letterSpacing: '-0.5px' }}>Suu<span>Quit</span></span>
             </div>
             {((step > 2 && step < 5) || (step === 1 && poisonSubStep > 0)) && (
-              <button className="btn-secondary" style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', width: 'auto' }} onClick={handleBack}>
-                Back
+              <button className="btn-secondary" style={{ padding: '6px 14px', borderRadius: '10px', fontSize: '12px', width: 'auto', marginLeft: 'auto' }} onClick={handleBack}>
+                ← Back
               </button>
             )}
           </header>
