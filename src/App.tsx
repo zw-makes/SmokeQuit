@@ -334,6 +334,158 @@ const PixelMedal = ({ size = 80 }: { size?: number }) => (
   </svg>
 );
 
+// Intensity Pixel Art Icons
+const PixelCasual = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Single relaxed cigarette at angle */}
+    <rect className="smoke-p1" x="20" y="4" width="2" height="2" fill="#9ca3af" opacity="0.5" />
+    {/* Cigarette body */}
+    <rect x="6" y="17" width="8" height="3" fill="#d97706" />
+    <rect x="14" y="17" width="8" height="3" fill="#f1f5f9" />
+    <rect x="13" y="17" width="1" height="3" fill="#1e293b" />
+    <rect x="22" y="18" width="2" height="1" fill="#ef4444" />
+    {/* Happy face above */}
+    <rect x="13" y="8" width="6" height="6" fill="#fde68a" />
+    <rect x="14" y="9" width="1" height="1" fill="#1e293b" />
+    <rect x="17" y="9" width="1" height="1" fill="#1e293b" />
+    <rect x="14" y="12" width="4" height="1" fill="#1e293b" />
+  </svg>
+);
+
+const PixelLeaf = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Leaf shape - light smoker */}
+    <rect x="14" y="6" width="2" height="16" fill="#16a34a" />
+    <rect x="10" y="9" width="12" height="2" fill="#22c55e" />
+    <rect x="9" y="11" width="14" height="2" fill="#4ade80" />
+    <rect x="10" y="13" width="12" height="2" fill="#22c55e" />
+    <rect x="11" y="15" width="10" height="2" fill="#16a34a" />
+    <rect x="13" y="17" width="6" height="2" fill="#15803d" />
+    <rect x="13" y="22" width="2" height="4" fill="#92400e" />
+    <rect x="15" y="22" width="2" height="4" fill="#a16207" />
+  </svg>
+);
+
+const PixelFlame = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Medium flame - regular habit */}
+    <rect x="14" y="6" width="4" height="2" fill="#ef4444" />
+    <rect x="12" y="8" width="8" height="2" fill="#ef4444" />
+    <rect x="10" y="10" width="12" height="2" fill="#f97316" />
+    <rect x="10" y="12" width="12" height="2" fill="#f97316" />
+    <rect x="10" y="14" width="12" height="2" fill="#fbbf24" />
+    <rect x="12" y="16" width="8" height="2" fill="#fbbf24" />
+    <rect x="14" y="18" width="4" height="2" fill="#fef08a" />
+    <rect x="8" y="22" width="16" height="2" fill="#1e293b" />
+    <rect x="14" y="10" width="4" height="4" fill="#fef08a" opacity="0.6" />
+  </svg>
+);
+
+const PixelPackFull = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Pack of cigarettes - pack a day */}
+    {/* Sticking out filters */}
+    <rect x="11" y="4" width="2" height="5" fill="#d97706" />
+    <rect x="14" y="3" width="2" height="5" fill="#d97706" />
+    <rect x="17" y="4" width="2" height="4" fill="#d97706" />
+    {/* Pack */}
+    <rect x="9" y="9" width="14" height="18" fill="#ffffff" stroke="#1e293b" strokeWidth="1" />
+    <rect x="9" y="9" width="14" height="6" fill="#dc2626" />
+    {/* Gold bar */}
+    <rect x="11" y="19" width="10" height="2" fill="#d97706" />
+    {/* Smoke wisps */}
+    <rect className="smoke-p1" x="20" y="5" width="2" height="2" fill="#9ca3af" opacity="0.6" />
+    <rect className="smoke-p2" x="22" y="3" width="2" height="2" fill="#d1d5db" opacity="0.4" />
+  </svg>
+);
+
+const PixelChain = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Chain links */}
+    <rect x="6" y="10" width="6" height="4" rx="1" fill="none" stroke="#64748b" strokeWidth="2" />
+    <rect x="8" y="11" width="2" height="2" fill="#94a3b8" />
+    <rect x="12" y="11" width="4" height="2" fill="#64748b" />
+    <rect x="14" y="10" width="6" height="4" rx="1" fill="none" stroke="#64748b" strokeWidth="2" />
+    <rect x="16" y="11" width="2" height="2" fill="#94a3b8" />
+    <rect x="20" y="11" width="4" height="2" fill="#64748b" />
+    <rect x="22" y="10" width="4" height="4" rx="1" fill="none" stroke="#64748b" strokeWidth="2" />
+    {/* Second row */}
+    <rect x="8" y="16" width="4" height="2" fill="#64748b" />
+    <rect x="10" y="15" width="6" height="4" rx="1" fill="none" stroke="#475569" strokeWidth="2" />
+    <rect x="12" y="16" width="2" height="2" fill="#94a3b8" />
+    <rect x="16" y="16" width="4" height="2" fill="#64748b" />
+    <rect x="18" y="15" width="6" height="4" rx="1" fill="none" stroke="#475569" strokeWidth="2" />
+    <rect x="20" y="16" width="2" height="2" fill="#94a3b8" />
+    {/* Cigarette clamped in chain */}
+    <rect x="4" y="21" width="24" height="3" fill="#f1f5f9" />
+    <rect x="4" y="21" width="6" height="3" fill="#d97706" />
+    <rect x="3" y="21" width="1" height="3" fill="#1e293b" />
+    <rect x="28" y="22" width="2" height="1" fill="#ef4444" />
+  </svg>
+);
+
+// Readiness Pixel Art Icons
+const PixelFist = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Power fist */}
+    <rect x="10" y="14" width="14" height="4" fill="#f97316" />
+    <rect x="10" y="18" width="14" height="4" fill="#ea580c" />
+    <rect x="10" y="22" width="14" height="4" fill="#f97316" />
+    <rect x="8" y="18" width="2" height="8" fill="#ea580c" />
+    <rect x="24" y="16" width="2" height="6" fill="#c2410c" />
+    <rect x="12" y="10" width="10" height="4" fill="#f97316" />
+    <rect x="10" y="12" width="2" height="2" fill="#ea580c" />
+    {/* Spark lines */}
+    <rect x="6" y="10" width="3" height="1" fill="#fbbf24" />
+    <rect x="5" y="14" width="3" height="1" fill="#fbbf24" />
+    <rect x="25" y="10" width="3" height="1" fill="#fbbf24" />
+    <rect x="26" y="14" width="2" height="1" fill="#fbbf24" />
+    <rect x="14" y="6" width="1" height="3" fill="#fbbf24" />
+    <rect x="18" y="5" width="1" height="3" fill="#fbbf24" />
+  </svg>
+);
+
+const PixelCalendar = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Calendar */}
+    <rect x="6" y="8" width="20" height="18" fill="#f8fafc" stroke="#1e293b" strokeWidth="1.5" />
+    <rect x="6" y="8" width="20" height="5" fill="#1e293b" />
+    <rect x="11" y="5" width="2" height="5" fill="#1e293b" />
+    <rect x="19" y="5" width="2" height="5" fill="#1e293b" />
+    {/* Day cells */}
+    <rect x="8" y="15" width="3" height="3" fill="#e2e8f0" />
+    <rect x="12" y="15" width="3" height="3" fill="#e2e8f0" />
+    <rect x="16" y="15" width="3" height="3" fill="#e2e8f0" />
+    <rect x="20" y="15" width="3" height="3" fill="#e2e8f0" />
+    <rect x="8" y="20" width="3" height="3" fill="#e2e8f0" />
+    {/* Highlighted quit date cell */}
+    <rect x="12" y="20" width="3" height="3" fill="#f95c3b" />
+    <rect x="16" y="20" width="3" height="3" fill="#e2e8f0" />
+    <rect x="20" y="20" width="3" height="3" fill="#e2e8f0" />
+  </svg>
+);
+
+const PixelSpyglass = ({ size = 36 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Magnifying glass */}
+    <rect x="10" y="6" width="12" height="2" fill="#64748b" />
+    <rect x="8" y="8" width="2" height="8" fill="#64748b" />
+    <rect x="22" y="8" width="2" height="8" fill="#64748b" />
+    <rect x="10" y="16" width="12" height="2" fill="#64748b" />
+    {/* Glass tint */}
+    <rect x="10" y="8" width="12" height="8" fill="#bae6fd" opacity="0.5" />
+    <rect x="11" y="9" width="3" height="3" fill="#f0f9ff" opacity="0.8" />
+    {/* Handle */}
+    <rect x="20" y="18" width="2" height="2" fill="#78350f" />
+    <rect x="22" y="20" width="2" height="2" fill="#78350f" />
+    <rect x="24" y="22" width="2" height="2" fill="#78350f" />
+    <rect x="26" y="24" width="2" height="2" fill="#78350f" />
+    {/* Question mark inside */}
+    <rect x="15" y="10" width="2" height="3" fill="#1e293b" />
+    <rect x="15" y="14" width="2" height="2" fill="#1e293b" />
+  </svg>
+);
+
 function App() {
   const [step, setStep] = useState(0);
   const [selectedPoisons, setSelectedPoisons] = useState<('cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe')[]>(['cigarette']);
@@ -814,11 +966,11 @@ function App() {
 
                   <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                     {[
-                      { id: 'just-social', label: 'Just Social / Occasional', sub: '1–3 a day or less', emoji: '😅' },
-                      { id: 'light', label: 'Light Smoker', sub: '4–9 a day', emoji: '🌿' },
-                      { id: 'moderate', label: 'Regular Habit', sub: '10–19 a day', emoji: '🔥' },
-                      { id: 'heavy', label: 'Pack a Day', sub: '20–30 a day', emoji: '💨' },
-                      { id: 'chain', label: 'Chain Smoker', sub: '30+ a day', emoji: '⛓️' },
+                      { id: 'just-social', label: 'Just Social / Occasional', sub: '1–3 a day or less', icon: <PixelCasual size={36} /> },
+                      { id: 'light', label: 'Light Smoker', sub: '4–9 a day', icon: <PixelLeaf size={36} /> },
+                      { id: 'moderate', label: 'Regular Habit', sub: '10–19 a day', icon: <PixelFlame size={36} /> },
+                      { id: 'heavy', label: 'Pack a Day', sub: '20–30 a day', icon: <PixelPackFull size={36} /> },
+                      { id: 'chain', label: 'Chain Smoker', sub: '30+ a day', icon: <PixelChain size={36} /> },
                     ].map((option) => (
                       <div
                         key={option.id}
@@ -835,7 +987,7 @@ function App() {
                       >
                         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                           <span style={{ fontWeight: 700 }}>{option.label}</span>
-                          <span style={{ fontSize: '22px', lineHeight: 1 }}>{option.emoji}</span>
+                          <div style={{ display: 'flex', alignItems: 'center' }}>{option.icon}</div>
                         </div>
                         <span style={{ fontSize: '12px', opacity: 0.65, fontWeight: 400 }}>{option.sub}</span>
                       </div>
@@ -875,9 +1027,9 @@ function App() {
 
                   <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                     {[
-                      { id: 'yes-now', label: "Yes, let's do this NOW!", emoji: '🔥' },
-                      { id: 'yes-soon', label: "I'm setting my quit date", emoji: '📅' },
-                      { id: 'exploring', label: "Just exploring for now", emoji: '🤔' },
+                      { id: 'yes-now', label: "Yes, let's do this NOW!", icon: <PixelFist size={36} /> },
+                      { id: 'yes-soon', label: "I'm setting my quit date", icon: <PixelCalendar size={36} /> },
+                      { id: 'exploring', label: "Just exploring for now", icon: <PixelSpyglass size={36} /> },
                     ].map((option) => (
                       <div
                         key={option.id}
@@ -893,7 +1045,7 @@ function App() {
                         style={{ justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px' }}
                       >
                         <span style={{ fontSize: '16px', fontWeight: 700 }}>{option.label}</span>
-                        <span style={{ fontSize: '24px', lineHeight: 1 }}>{option.emoji}</span>
+                        <div style={{ display: 'flex', alignItems: 'center' }}>{option.icon}</div>
                       </div>
                     ))}
                   </div>
