@@ -340,7 +340,7 @@ function App() {
   const [lastSelectedPoison, setLastSelectedPoison] = useState<'cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe'>('cigarette');
   const [poisonSubStep, setPoisonSubStep] = useState(0);
   const [age, setAge] = useState(25);
-  const [addictionLevel, setAddictionLevel] = useState<'casual' | 'moderate' | 'full'>('moderate');
+  const [smokingIntensity, setSmokingIntensity] = useState<string>('');
 
   // Staggered element revealing state for onboarding quote slides
   const [revealedElements, setRevealedElements] = useState(0);
@@ -510,29 +510,6 @@ function App() {
     }));
   };
 
-  const handleSelectAddictionLevel = (level: 'casual' | 'moderate' | 'full') => {
-    setAddictionLevel(level);
-    setPoisonsHabits(prev => {
-      const updated = { ...prev };
-      Object.keys(updated).forEach((poisonId) => {
-        const config = getPoisonConfigById(poisonId);
-        let dailyVal = 10;
-        if (level === 'casual') {
-          dailyVal = Math.max(1, Math.round(config.maxDaily * 0.15));
-        } else if (level === 'moderate') {
-          dailyVal = Math.round((config.minDaily + config.maxDaily) / 2);
-        } else {
-          dailyVal = config.maxDaily;
-        }
-        updated[poisonId] = {
-          ...updated[poisonId],
-          daily: dailyVal
-        };
-      });
-      return updated;
-    });
-  };
-
   // User Profile inputs
   const [quitDate, setQuitDate] = useState(() => {
     const today = new Date();
@@ -593,7 +570,7 @@ function App() {
 
   // Live Stats calculations (run every second on the dashboard)
   useEffect(() => {
-    if (step !== 6) return;
+    if (step !== 5) return;
 
     const calculateStats = () => {
       const quitDateTime = new Date(`${quitDate}T${quitTime}`);
@@ -640,12 +617,12 @@ function App() {
   }, [step, quitDate, quitTime, poisonsHabits, selectedPoisons]);
 
   const handleNext = () => {
-    if (step < 6) setStep(step + 1);
+    if (step < 5) setStep(step + 1);
   };
 
   const handleBack = () => {
-    if (step === 1 && poisonSubStep === 1) {
-      setPoisonSubStep(0);
+    if (step === 1 && poisonSubStep > 0) {
+      setPoisonSubStep(poisonSubStep - 1);
     } else if (step > 1) {
       setStep(step - 1);
     }
@@ -653,8 +630,8 @@ function App() {
 
   const handleNextPills = (e: React.MouseEvent) => {
     e.stopPropagation();
-    if (poisonSubStep === 0) {
-      setPoisonSubStep(1);
+    if (poisonSubStep < 3) {
+      setPoisonSubStep(poisonSubStep + 1);
     } else {
       setStep(2);
     }
@@ -678,7 +655,7 @@ function App() {
               <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '24px', height: '24px', borderRadius: '6px' }} />
               Suu<span>Quit</span>
             </div>
-            {((step > 2 && step < 6) || (step === 1 && poisonSubStep === 1)) && (
+            {((step > 2 && step < 5) || (step === 1 && poisonSubStep > 0)) && (
               <button className="btn-secondary" style={{ padding: '6px 12px', borderRadius: '10px', fontSize: '12px', width: 'auto' }} onClick={handleBack}>
                 Back
               </button>
@@ -762,10 +739,10 @@ function App() {
             {/* Header / Question 1 */}
             <div style={{ padding: '0 24px', marginTop: '24px', width: '100%', zIndex: 10 }}>
               <div className={`poison-question-1 slide-up-item ${revealedElements >= 1 ? 'visible' : ''}`}>
-                {poisonSubStep === 0 
-                  ? "So… you're the brave one who's actually gonna quit smoking?" 
-                  : "Btw, How old are you?"
-                }
+                {poisonSubStep === 0 && "So… you're the brave one who's actually gonna quit smoking?"}
+                {poisonSubStep === 1 && "Btw, How old are you?"}
+                {poisonSubStep === 2 && "As a friend… how many a day?"}
+                {poisonSubStep === 3 && "So, are you ready to start this quit journey with me?"}
               </div>
             </div>
 
@@ -829,6 +806,98 @@ function App() {
                     ))}
                   </div>
                 </>
+              ) : poisonSubStep === 2 ? (
+                <>
+                  <div className={`poison-question-2 slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`} style={{ marginBottom: '24px' }}>
+                    Casual or full addiction?
+                  </div>
+
+                  <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
+                    {[
+                      { id: 'just-social', label: 'Just Social / Occasional', sub: '1–3 a day or less', emoji: '😅' },
+                      { id: 'light', label: 'Light Smoker', sub: '4–9 a day', emoji: '🌿' },
+                      { id: 'moderate', label: 'Regular Habit', sub: '10–19 a day', emoji: '🔥' },
+                      { id: 'heavy', label: 'Pack a Day', sub: '20–30 a day', emoji: '💨' },
+                      { id: 'chain', label: 'Chain Smoker', sub: '30+ a day', emoji: '⛓️' },
+                    ].map((option) => (
+                      <div
+                        key={option.id}
+                        className={`poison-option-item ${smokingIntensity === option.id ? 'active' : ''}`}
+                        onClick={async () => {
+                          setSmokingIntensity(option.id);
+                          try {
+                            await Haptics.impact({ style: ImpactStyle.Light });
+                          } catch (e) {
+                            if (navigator.vibrate) navigator.vibrate(20);
+                          }
+                        }}
+                        style={{ justifyContent: 'space-between', flexDirection: 'column', alignItems: 'stretch', gap: '2px', padding: '12px 18px' }}
+                      >
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <span style={{ fontWeight: 700 }}>{option.label}</span>
+                          <span style={{ fontSize: '22px', lineHeight: 1 }}>{option.emoji}</span>
+                        </div>
+                        <span style={{ fontSize: '12px', opacity: 0.65, fontWeight: 400 }}>{option.sub}</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
+              ) : poisonSubStep === 3 ? (
+                <>
+                  <div className={`pop-item ${revealedElements >= 2 ? 'visible' : ''}`} style={{ display: 'flex', justifyContent: 'center', marginBottom: '24px' }}>
+                    <svg width="120" height="120" viewBox="0 0 64 64" fill="none">
+                      {/* Pixel heart */}
+                      <rect x="8" y="16" width="12" height="4" fill="#f95c3b" />
+                      <rect x="20" y="12" width="8" height="4" fill="#f95c3b" />
+                      <rect x="28" y="8" width="8" height="4" fill="#f95c3b" />
+                      <rect x="36" y="12" width="8" height="4" fill="#f95c3b" />
+                      <rect x="44" y="16" width="12" height="4" fill="#f95c3b" />
+                      <rect x="4" y="20" width="56" height="4" fill="#f95c3b" />
+                      <rect x="4" y="24" width="56" height="4" fill="#ff7a57" />
+                      <rect x="8" y="28" width="48" height="4" fill="#f95c3b" />
+                      <rect x="12" y="32" width="40" height="4" fill="#ff7a57" />
+                      <rect x="16" y="36" width="32" height="4" fill="#f95c3b" />
+                      <rect x="20" y="40" width="24" height="4" fill="#ff7a57" />
+                      <rect x="24" y="44" width="16" height="4" fill="#f95c3b" />
+                      <rect x="28" y="48" width="8" height="4" fill="#ff7a57" />
+                      <rect x="30" y="52" width="4" height="4" fill="#f95c3b" />
+                    </svg>
+                  </div>
+
+                  <div className={`slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`} style={{ textAlign: 'center', marginBottom: '20px' }}>
+                    <div style={{ fontFamily: "'Outfit', sans-serif", fontSize: '28px', fontWeight: 800, color: '#000', lineHeight: 1.3, marginBottom: '12px' }}>
+                      Ready to quit?
+                    </div>
+                    <div style={{ fontFamily: "'Caveat', cursive", fontSize: '20px', color: '#555', lineHeight: 1.5 }}>
+                      I'll be right here with you — tracking every hour, every dollar saved, every breath easier.
+                    </div>
+                  </div>
+
+                  <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
+                    {[
+                      { id: 'yes-now', label: "Yes, let's do this NOW!", emoji: '🔥' },
+                      { id: 'yes-soon', label: "I'm setting my quit date", emoji: '📅' },
+                      { id: 'exploring', label: "Just exploring for now", emoji: '🤔' },
+                    ].map((option) => (
+                      <div
+                        key={option.id}
+                        className={`poison-option-item ${smokingIntensity === ('ready-' + option.id) ? 'active' : ''}`}
+                        onClick={async () => {
+                          setSmokingIntensity('ready-' + option.id);
+                          try {
+                            await Haptics.impact({ style: ImpactStyle.Light });
+                          } catch (e) {
+                            if (navigator.vibrate) navigator.vibrate(20);
+                          }
+                        }}
+                        style={{ justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px' }}
+                      >
+                        <span style={{ fontSize: '16px', fontWeight: 700 }}>{option.label}</span>
+                        <span style={{ fontSize: '24px', lineHeight: 1 }}>{option.emoji}</span>
+                      </div>
+                    ))}
+                  </div>
+                </>
               ) : (
                 <>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px', width: '100%' }}>
@@ -879,7 +948,7 @@ function App() {
               {/* Pill Pack Button & Pointing Arrow + Aligned Click Helper (Slide 1) */}
               <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 20, marginTop: '8px' }}>
                 <div className={`click-helper ${revealedElements >= 4 ? 'visible' : ''}`} style={{ position: 'static', padding: 0 }}>
-                  {poisonSubStep === 0 ? "Tap the pills to continue" : "Tap the pills to save profile"}
+                  {poisonSubStep === 0 ? "Tap the pills to continue" : poisonSubStep === 3 ? "Let's go! Tap the pills" : "Tap the pills to continue"}
                 </div>
                 <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                   <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
@@ -946,7 +1015,6 @@ function App() {
                 <div className="bullet active"></div>
                 <div className="bullet"></div>
                 <div className="bullet"></div>
-                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
                 Get Started <ArrowRight size={18} />
@@ -998,7 +1066,6 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet active"></div>
                 <div className="bullet"></div>
-                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
                 Continue <ArrowRight size={18} />
@@ -1009,46 +1076,18 @@ function App() {
           {/* SLIDE 4: Onboarding Setup */}
           <div className={`slide ${step === 4 ? 'slide-active' : step < 4 ? 'slide-next' : 'slide-prev'}`}>
             <div className="slide-header">
-              <h1 className="slide-title" style={{ fontSize: '24px', lineHeight: '1.25' }}>
-                As a friend… how many a day?<br />
-                <span className="slide-title-gradient">Casual or full addiction?</span>
-              </h1>
-              <p className="slide-subtitle">Choose your general addiction level, then fine-tune details below.</p>
+              <h1 className="slide-title">Setup <span className="slide-title-gradient">Goal</span></h1>
+              <p className="slide-subtitle">Enter your smoking habits so we can calculate your savings and health improvements.</p>
             </div>
 
             <div className="glass-card" style={{ padding: '18px', maxHeight: '380px', overflowY: 'auto' }}>
-              {/* Addiction selector cards */}
-              <div className="addiction-options" style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '10px', marginBottom: '18px' }}>
-                {[
-                  { id: 'casual', label: 'Casual', desc: 'Social/Light' },
-                  { id: 'moderate', label: 'Moderate', desc: 'Habitual' },
-                  { id: 'full', label: 'Addicted', desc: 'Heavy Use' }
-                ].map((level) => (
-                  <div 
-                    key={level.id}
-                    className={`addiction-card ${addictionLevel === level.id ? 'active' : ''}`}
-                    onClick={async () => {
-                      handleSelectAddictionLevel(level.id as any);
-                      try {
-                        await Haptics.impact({ style: ImpactStyle.Light });
-                      } catch (e) {
-                        if (navigator.vibrate) navigator.vibrate(20);
-                      }
-                    }}
-                  >
-                    <span className="addiction-label">{level.label}</span>
-                    <span className="addiction-desc">{level.desc}</span>
-                  </div>
-                ))}
-              </div>
-
               <div className="setup-form">
                 {selectedPoisons.map((poisonId) => {
                   const config = getPoisonConfigById(poisonId);
                   const habit = poisonsHabits[poisonId];
                   return (
                     <div key={poisonId} style={{ borderBottom: selectedPoisons.length > 1 ? '1px solid rgba(255,255,255,0.06)' : 'none', paddingBottom: '16px', marginBottom: '16px' }}>
-                      <h3 style={{ fontSize: '14px', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                      <h3 style={{ fontSize: '15px', color: 'var(--accent-primary)', marginBottom: '12px', textTransform: 'capitalize', display: 'flex', alignItems: 'center', gap: '6px' }}>
                         {poisonId === 'cigarette' && <PixelCigarette size={24} />}
                         {poisonId === 'cigar' && <PixelCigar size={24} />}
                         {poisonId === 'vape' && <PixelVape size={24} />}
@@ -1119,54 +1158,15 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet"></div>
                 <div className="bullet active"></div>
-                <div className="bullet"></div>
               </div>
               <button className="btn-primary" onClick={handleNext}>
-                Continue <ArrowRight size={18} />
+                Create Dashboard <Sparkles size={18} />
               </button>
             </div>
           </div>
 
-          {/* SLIDE 5: Onboarding Commitment Screen */}
-          <div className={`slide ${step === 5 ? 'slide-active' : step < 5 ? 'slide-next' : 'slide-prev'}`}>
-            <div className="slide-header" style={{ marginTop: '20px' }}>
-              <h1 className="slide-title">Ready to <span className="slide-title-gradient">Commit</span>?</h1>
-              <p className="slide-subtitle" style={{ fontSize: '17px', color: 'var(--text-primary)', fontWeight: '600', marginTop: '16px', lineHeight: '1.4' }}>
-                "So, are you ready to start this quit journey with me?"
-              </p>
-            </div>
-
-            <div style={{ flex: 1, display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: '20px' }}>
-              <div className="breathing-container" style={{ height: '180px', margin: '10px 0' }}>
-                <div className="breathing-circle-outer" style={{ width: '130px', height: '130px', animationDuration: '3s' }}>
-                  <div className="breathing-circle-inner" style={{ width: '90px', height: '90px', boxShadow: '0 0 30px rgba(168, 85, 247, 0.4)', background: 'linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-tertiary) 100%)' }}>
-                    <Heart size={36} fill="#ffffff" stroke="none" className="arrow-bounce" style={{ animationDuration: '1.5s' }} />
-                  </div>
-                </div>
-              </div>
-
-              <div className="glass-card" style={{ padding: '16px 20px', width: '100%', textAlign: 'center', border: '1px solid rgba(168, 85, 247, 0.2)' }}>
-                <p style={{ fontSize: '14px', color: 'var(--text-secondary)', lineHeight: '1.5' }}>
-                  🤝 <strong>No one quits alone.</strong> By starting this, you join our supportive network of friends lifting each other up. Your lungs start repairing the very second we lock this in.
-                </p>
-              </div>
-            </div>
-
-            <div className="bottom-nav">
-              <div className="bullets-container">
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="bullet"></div>
-                <div className="bullet active"></div>
-              </div>
-              <button className="btn-primary" onClick={handleNext} style={{ background: 'linear-gradient(135deg, var(--accent-secondary) 0%, var(--accent-tertiary) 100%)', boxShadow: '0 8px 20px rgba(244, 63, 94, 0.25)' }}>
-                Yes, I'm Ready! <Sparkles size={18} />
-              </button>
-            </div>
-          </div>
-
-          {/* SLIDE 6: Dashboard Mockup */}
-          <div className={`slide ${step === 6 ? 'slide-active' : 'slide-next'}`}>
+          {/* SLIDE 5: Dashboard Mockup */}
+          <div className={`slide ${step === 5 ? 'slide-active' : 'slide-next'}`}>
             <div className="slide-header">
               <p style={{ color: 'var(--accent-primary)', fontSize: '11px', fontWeight: 'bold', letterSpacing: '1px', textTransform: 'uppercase' }}>Your Live Dashboard</p>
               <h1 className="slide-title" style={{ fontSize: '28px', marginBottom: '4px' }}>Clean Progress</h1>
@@ -1285,11 +1285,7 @@ function App() {
                 }}>
                   <Share2 size={16} /> Share
                 </button>
-                <button className="btn-primary" style={{ padding: '12px' }} onClick={() => {
-                  setStep(0);
-                  setPoisonSubStep(0);
-                  setAddictionLevel('moderate');
-                }}>
+                <button className="btn-primary" style={{ padding: '12px' }} onClick={() => setStep(0)}>
                   Restart Setup
                 </button>
               </div>
