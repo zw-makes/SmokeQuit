@@ -10,7 +10,7 @@ import {
   Sparkles,
   Share2
 } from 'lucide-react';
-import AuthPage from './AuthPage';
+import { AuthView } from './AuthView';
 
 // Pixel Art Icons
 const PixelCigarette = ({ size = 80 }: { size?: number }) => (
@@ -521,7 +521,6 @@ function App() {
   const [poisonSubStep, setPoisonSubStep] = useState(0);
   const [age, setAge] = useState(25);
   const [smokingIntensity, setSmokingIntensity] = useState<string>('');
-  const [showAuth, setShowAuth] = useState(false);
 
   // Staggered element revealing state for onboarding quote slides
   const [revealedElements, setRevealedElements] = useState(0);
@@ -820,9 +819,11 @@ function App() {
       } else {
         setStep(0);
       }
-    } else if (step === 2) {
+    } else if (step === 1.5) {
       setStep(1);
       setPoisonSubStep(3);
+    } else if (step === 2) {
+      setStep(1.5);
     } else if (step > 1) {
       setStep(step - 1);
     }
@@ -834,14 +835,14 @@ function App() {
     if (poisonSubStep < 3) {
       setPoisonSubStep(poisonSubStep + 1);
     } else {
-      setStep(2);
+      setStep(1.5);
     }
   };
 
   return (
-    <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'} ${step <= 1 ? 'theme-cream' : 'theme-dark'}`}>
+    <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'} ${step <= 1.5 ? 'theme-cream' : 'theme-dark'}`}>
       {/* Background blobs for premium glow styling */}
-      {step > 1 && (
+      {step > 1.5 && (
         <div className="bg-glow-container">
           <div className="bg-glow-blob blob-teal"></div>
           <div className="bg-glow-blob blob-purple"></div>
@@ -851,13 +852,15 @@ function App() {
       <div className="app-content">
         {/* Navigation Header */}
         {step >= 0 && (
-          <header className="app-header">
-            <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
-              <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: step <= 1 ? '#1e293b' : '#ffffff' }}>
-                Suu<span style={{ color: '#ef4444' }}>Quit</span>
-              </span>
-            </div>
+          <header className="app-header" style={{ justifyContent: step === 1.5 ? 'flex-end' : 'space-between', gap: '12px' }}>
+            {step !== 1.5 && (
+              <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
+                <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: step <= 1.5 ? '#1e293b' : '#ffffff' }}>
+                  Suu<span style={{ color: '#ef4444' }}>Quit</span>
+                </span>
+              </div>
+            )}
             
             {/* Step 0: Skip button */}
             {step === 0 && (
@@ -887,8 +890,18 @@ function App() {
               </button>
             )}
 
-            {/* Back button for Step 1 (poison selection & sub-steps) and Step 2 (Welcome screen) */}
-            {((step === 2) || (step === 1 && poisonSubStep >= 0)) && (
+            {/* Logo on the right side for Step 1.5 */}
+            {step === 1.5 && (
+              <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px', marginRight: 'auto' }}>
+                <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
+                <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: '#1e293b' }}>
+                  Suu<span style={{ color: '#ef4444' }}>Quit</span>
+                </span>
+              </div>
+            )}
+
+            {/* Back button for Step 1, Step 1.5, and Step 2 */}
+            {((step === 2) || (step === 1.5) || (step === 1 && poisonSubStep >= 0)) && (
               <button 
                 className="btn-secondary" 
                 style={{ 
@@ -899,11 +912,10 @@ function App() {
                   display: 'flex', 
                   alignItems: 'center', 
                   justifyContent: 'center', 
-                  marginLeft: 'auto',
-                  border: step <= 1 ? '2px solid #1e293b' : '2px solid #ffffff',
-                  backgroundColor: step <= 1 ? '#ffffff' : '#1e293b',
-                  color: step <= 1 ? '#1e293b' : '#ffffff',
-                  boxShadow: step <= 1 ? '2px 2px 0px #1e293b' : '2px 2px 0px #ffffff',
+                  border: step <= 1.5 ? '2px solid #1e293b' : '2px solid #ffffff',
+                  backgroundColor: step <= 1.5 ? '#ffffff' : '#1e293b',
+                  color: step <= 1.5 ? '#1e293b' : '#ffffff',
+                  boxShadow: step <= 1.5 ? '2px 2px 0px #1e293b' : '2px 2px 0px #ffffff',
                   cursor: 'pointer'
                 }} 
                 onClick={handleBack}
@@ -1230,6 +1242,16 @@ function App() {
             </div>
           </div>
 
+          {/* SLIDE 1.5: View-only Auth Screen */}
+          {step === 1.5 && (
+            <AuthView 
+              onSuccess={() => {
+                triggerHapticFeedback(ImpactStyle.Medium);
+                setStep(2);
+              }}
+            />
+          )}
+
           {/* SLIDE 2: Welcome Screen */}
           <div className={`slide ${step === 2 ? 'slide-active' : step < 2 ? 'slide-next' : 'slide-prev'}`}>
             <div className="slide-header">
@@ -1278,10 +1300,7 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet"></div>
               </div>
-              <button className="btn-primary" onClick={() => {
-                triggerHapticFeedback(ImpactStyle.Medium);
-                setShowAuth(true);
-              }}>
+              <button className="btn-primary" onClick={handleNext}>
                 Get Started <ArrowRight size={18} />
               </button>
             </div>
@@ -1559,31 +1578,6 @@ function App() {
 
         </div>
       </div>
-
-      {showAuth && (
-        <div 
-          className="auth-overlay-container" 
-          style={{ 
-            position: 'absolute', 
-            top: 0, 
-            left: 0, 
-            right: 0, 
-            bottom: 0, 
-            zIndex: 9999, 
-            backgroundColor: 'var(--cream-bg, #fbfbf4)'
-          }}
-        >
-          <AuthPage 
-            onAuthSuccess={() => {
-              setShowAuth(false);
-              handleNext();
-            }} 
-            onBack={() => {
-              setShowAuth(false);
-            }} 
-          />
-        </div>
-      )}
     </div>
   );
 }
