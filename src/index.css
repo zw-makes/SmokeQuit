@@ -651,6 +651,7 @@ body {
   justify-content: center; /* Vertically center in the middle */
   align-items: flex-start; /* Align contents to the left */
   cursor: pointer;
+  transition: none !important;
 }
 
 .splash-quote {
@@ -871,7 +872,6 @@ body {
   flex-direction: column;
   gap: 10px;
   margin-top: 10px;
-  margin-bottom: 110px; /* Space for the pills button */
 }
 
 .poison-option-item {

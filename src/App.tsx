@@ -593,8 +593,26 @@ function App() {
                 <PixelFirstAid />
               </div>
             </div>
-            {/* Pill Pack Button & Pointing Arrow (Slide 0) */}
-            <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
+            {/* Center Quote Area */}
+            <div style={{ flex: 1, display: 'flex', alignItems: 'center', width: '100%', zIndex: 10 }}>
+              <div className={`splash-quote ${revealedElements >= 1 ? 'visible' : ''}`}>
+                "The <span style={{ position: 'relative', display: 'inline-block' }}>
+                  smoke
+                  <div 
+                    className={`pop-item ${revealedElements >= 1 ? 'visible' : ''}`}
+                    style={{ position: 'absolute', top: '-60px', left: '-10px', transform: 'rotate(-12deg)', pointerEvents: 'none' }}
+                  >
+                    <PixelCigar />
+                  </div>
+                </span> clears.<br />So will you <span style={{ color: '#f95c3b' }}>- zw</span>"
+              </div>
+            </div>
+
+            {/* Pill Pack Button & Pointing Arrow + Aligned Click Helper (Slide 0) */}
+            <div style={{ position: 'absolute', bottom: '80px', left: '24px', right: '24px', display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 20 }}>
+              <div className={`click-helper ${revealedElements >= 7 ? 'visible' : ''}`} style={{ position: 'static', padding: 0 }}>
+                Tap the pills to continue
+              </div>
               <div className={`pop-item ${revealedElements >= 7 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
                   <PixelArrow />
@@ -612,24 +630,6 @@ function App() {
                   </div>
                 </div>
               </div>
-            </div>
-
-            {/* Center Quote Area */}
-            <div style={{ flex: 1, display: 'flex', alignItems: 'center', width: '100%', zIndex: 10 }}>
-              <div className={`splash-quote ${revealedElements >= 1 ? 'visible' : ''}`}>
-                "The <span style={{ position: 'relative', display: 'inline-block' }}>
-                  smoke
-                  <div 
-                    className={`pop-item ${revealedElements >= 1 ? 'visible' : ''}`}
-                    style={{ position: 'absolute', top: '-60px', left: '-10px', transform: 'rotate(-12deg)', pointerEvents: 'none' }}
-                  >
-                    <PixelCigar />
-                  </div>
-                </span> clears.<br />So will you <span style={{ color: '#f95c3b' }}>- zw</span>"
-              </div>
-            </div>
-            <div className={`click-helper ${revealedElements >= 7 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
-              Tap the pills to continue
             </div>
           </div>
 
@@ -689,31 +689,30 @@ function App() {
                   </div>
                 ))}
               </div>
-            </div>
 
-            {/* Pill Pack Button & Pointing Arrow (Slide 1) */}
-            <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
-              <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
-                  <PixelArrow />
+              {/* Pill Pack Button & Pointing Arrow + Aligned Click Helper (Slide 1) */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', zIndex: 20, marginTop: '8px' }}>
+                <div className={`click-helper ${revealedElements >= 4 ? 'visible' : ''}`} style={{ position: 'static', padding: 0 }}>
+                  Tap the pills to continue
                 </div>
-                <div 
-                  className="pixel-btn"
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    setStep(2);
-                  }}
-                  style={{ transform: 'rotate(-15deg)' }}
-                >
-                  <div className="pixel-btn-hover-wrap">
-                    <PixelPills />
+                <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                  <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
+                    <PixelArrow />
+                  </div>
+                  <div 
+                    className="pixel-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setStep(2);
+                    }}
+                    style={{ transform: 'rotate(-15deg)' }}
+                  >
+                    <div className="pixel-btn-hover-wrap">
+                      <PixelPills />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className={`click-helper ${revealedElements >= 4 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
-              Tap the pills to continue
             </div>
           </div>
 
