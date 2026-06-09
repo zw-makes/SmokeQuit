@@ -36,8 +36,7 @@
 }
 
 input, textarea, [contenteditable="true"] {
-  user-select: text !important;
-  -webkit-user-select: text !important;
+  user-select: auto !important;
 }
 
 body {
