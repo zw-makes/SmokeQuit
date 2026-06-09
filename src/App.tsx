@@ -663,11 +663,11 @@ function App() {
               {/* List of Options */}
               <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                 {[
-                  { id: 'cigarette', label: 'Cigarettes' },
-                  { id: 'cigar', label: 'Cigars' },
-                  { id: 'vape', label: 'Vapes / E-Cigs' },
-                  { id: 'hookah', label: 'Hookah / Shisha' },
-                  { id: 'pipe', label: 'Pipe Tobacco' }
+                  { id: 'cigarette', label: 'Cigarettes', icon: <PixelCigarette size={40} /> },
+                  { id: 'cigar', label: 'Cigars', icon: <PixelCigar size={40} /> },
+                  { id: 'vape', label: 'Vapes / E-Cigs', icon: <PixelVape size={40} /> },
+                  { id: 'hookah', label: 'Hookah / Shisha', icon: <PixelHookah size={40} /> },
+                  { id: 'pipe', label: 'Pipe Tobacco', icon: <PixelPipe size={40} /> }
                 ].map((option) => (
                   <div 
                     key={option.id}
@@ -680,9 +680,12 @@ function App() {
                         if (navigator.vibrate) navigator.vibrate(20);
                       }
                     }}
+                    style={{ justifyContent: 'space-between', alignItems: 'center' }}
                   >
-                    <span className="bullet-indicator"></span>
-                    {option.label}
+                    <span>{option.label}</span>
+                    <div style={{ display: 'flex', alignItems: 'center', height: '100%' }}>
+                      {option.icon}
+                    </div>
                   </div>
                 ))}
               </div>

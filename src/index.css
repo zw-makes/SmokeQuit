@@ -858,11 +858,6 @@ body {
 }
 
 .poison-image-container {
-  background: rgba(255, 255, 255, 0.7);
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 20px;
-  padding: 10px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -904,19 +899,6 @@ body {
   color: #ffffff;
   border-color: #000000;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
-}
-
-.poison-option-item .bullet-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #9ca3af;
-  transition: all 0.2s ease;
-}
-
-.poison-option-item.active .bullet-indicator {
-  background: #f95c3b;
-  box-shadow: 0 0 8px #f95c3b;
 }
 
 
