@@ -224,8 +224,8 @@ const PixelPills = () => (
   </svg>
 );
 
-const PixelFirstAid = () => (
-  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
+const PixelFirstAid = ({ size = 80 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
     {/* Isometric First Aid Box */}
     {/* Top Face */}
     <path d="M16 4 L26 9 L16 14 L6 9 Z" fill="#94a3b8" />
@@ -1152,51 +1152,55 @@ function App() {
                 <>
                   <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px', gap: '16px', width: '100%' }}>
                     <div className={`poison-question-2 slide-up-item ${revealedElements >= 2 ? 'visible' : ''}`}>
-                      Select your age
+                      Select your age group
                     </div>
                     
-                    {/* Dynamically changing SVG based on selected age */}
+                    {/* Dynamically changing SVG based on selected age bracket */}
                     <div className={`poison-image-container pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
-                      {age < 20 && <PixelSkateboard size={100} />}
-                      {age >= 20 && age <= 29 && <PixelCoffeeMug size={100} />}
-                      {age >= 30 && age <= 49 && <PixelHourglass size={100} />}
-                      {age >= 50 && <PixelMedal size={100} />}
+                      {age < 18 && <PixelSkateboard size={100} />}
+                      {age >= 18 && age <= 25 && <PixelCoffeeMug size={100} />}
+                      {age >= 26 && age <= 35 && <PixelHourglass size={100} />}
+                      {age >= 36 && age <= 50 && <PixelMedal size={100} />}
+                      {age > 50 && <PixelFirstAid size={100} />}
                     </div>
                   </div>
 
-                  {/* Age Selector input slider */}
+                  {/* Age options list */}
                   <div className={`poison-options-list slide-up-item ${revealedElements >= 3 ? 'visible' : ''}`} style={{ width: '100%' }}>
-                    <div className="input-group" style={{ padding: '0 4px' }}>
-                      <input 
-                        type="range" 
-                        min="12" 
-                        max="90" 
-                        value={age} 
-                        onChange={(e) => {
-                          const val = parseInt(e.target.value);
-                          if (val !== age) {
-                            setAge(val);
+                    {[
+                      { range: '12 - 17', minAge: 15, reaction: "🛹 Rad! Quitting now keeps you active, fit, and in control of your future." },
+                      { range: '18 - 25', minAge: 22, reaction: "☕ Starting your career and life with clean lungs is the best investment." },
+                      { range: '26 - 35', minAge: 30, reaction: "⏳ Time to focus on longevity. Your body recovery starts the moment you stop." },
+                      { range: '36 - 50', minAge: 43, reaction: "🏅 Truly inspiring. It is never too late to reclaim your health and wisdom." },
+                      { range: '50+', minAge: 60, reaction: "❤️ The best time to quit was yesterday, the second best is right now!" }
+                    ].map((opt) => {
+                      const isSelected = (opt.range === '12 - 17' && age < 18) ||
+                                         (opt.range === '18 - 25' && age >= 18 && age <= 25) ||
+                                         (opt.range === '26 - 35' && age >= 26 && age <= 35) ||
+                                         (opt.range === '36 - 50' && age >= 36 && age <= 50) ||
+                                         (opt.range === '50+' && age > 50);
+                      return (
+                        <div 
+                          key={opt.range}
+                          className={`poison-option-item ${isSelected ? 'active' : ''}`}
+                          onClick={() => {
+                            setAge(opt.minAge);
                             triggerHapticFeedback(ImpactStyle.Light);
-                          }
-                        }}
-                        className="range-slider age-slider"
-                      />
-                      <div className="slider-val" style={{ margin: '8px 0 20px 0' }}>
-                        <span>12 yrs</span>
-                        <span style={{ color: '#000000', fontWeight: 'bold', fontSize: '18px' }}>
-                          {age} years old
-                        </span>
-                        <span>90 yrs</span>
-                      </div>
-                      
-                      {/* Wise/encouraging age reaction message */}
-                      <div className="age-wise-text">
-                        {age < 20 && "🛹 Rad! Quitting now keeps you active, fit, and in control of your future."}
-                        {age >= 20 && age <= 29 && "☕ Starting your career and life with clean lungs is the best investment."}
-                        {age >= 30 && age <= 49 && "⏳ Time to focus on longevity. Your body recovery starts the moment you stop."}
-                        {age >= 50 && "🏅 Truly inspiring. It is never too late to reclaim your health and wisdom."}
-                      </div>
-                    </div>
+                          }}
+                          style={{ justifyContent: 'space-between', flexDirection: 'column', alignItems: 'stretch', gap: '4px', padding: '12px 18px' }}
+                        >
+                          <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontWeight: 700 }}>{opt.range}</span>
+                            <span style={{ fontSize: '12px', opacity: 0.8 }}>Years old</span>
+                          </div>
+                          {isSelected && (
+                            <span style={{ fontSize: '12px', opacity: 0.65, fontWeight: 400, marginTop: '2px' }}>
+                              {opt.reaction}
+                            </span>
+                          )}
+                        </div>
+                      );
+                    })}
                   </div>
                 </>
               )}
