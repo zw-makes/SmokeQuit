@@ -136,7 +136,7 @@ function App() {
   };
 
   return (
-    <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'}`}>
+    <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'} ${step <= 1 ? 'theme-cream' : 'theme-dark'}`}>
       {/* Background blobs for premium glow styling */}
       {step > 1 && (
         <div className="bg-glow-container">

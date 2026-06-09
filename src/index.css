@@ -49,11 +49,18 @@ body {
 
 /* App Mockup Shell (centered on web, full screen on iOS) */
 .app-shell {
-  background: var(--bg-surface);
   position: relative;
   overflow: hidden;
   display: flex;
   flex-direction: column;
+}
+
+.app-shell.theme-cream {
+  background-color: #FAF7F0 !important;
+}
+
+.app-shell.theme-dark {
+  background-color: var(--bg-surface) !important;
 }
 
 /* Native mode: occupies 100% of viewport, no bezel */
