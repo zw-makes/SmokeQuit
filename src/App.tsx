@@ -486,6 +486,33 @@ const PixelSpyglass = ({ size = 36 }: { size?: number }) => (
   </svg>
 );
 
+const PixelBackArrow = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Arrow shaft */}
+    <rect x="12" y="14" width="12" height="4" fill="currentColor" />
+    {/* Arrow head */}
+    <rect x="10" y="12" width="2" height="8" fill="currentColor" />
+    <rect x="8" y="14" width="2" height="4" fill="currentColor" />
+    <rect x="6" y="16" width="2" height="2" fill="currentColor" />
+  </svg>
+);
+
+const PixelSkip = ({ size = 20 }: { size?: number }) => (
+  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
+    {/* Double arrowheads pointing right */}
+    <rect x="8" y="10" width="2" height="12" fill="currentColor" />
+    <rect x="10" y="12" width="2" height="8" fill="currentColor" />
+    <rect x="12" y="14" width="2" height="4" fill="currentColor" />
+    
+    <rect x="16" y="10" width="2" height="12" fill="currentColor" />
+    <rect x="18" y="12" width="2" height="8" fill="currentColor" />
+    <rect x="20" y="14" width="2" height="4" fill="currentColor" />
+
+    {/* Vertical bar on the right */}
+    <rect x="24" y="10" width="2" height="12" fill="currentColor" />
+  </svg>
+);
+
 function App() {
   const [step, setStep] = useState(0);
   const [selectedPoisons, setSelectedPoisons] = useState<('cigarette' | 'cigar' | 'vape' | 'hookah' | 'pipe')[]>(['cigarette']);
@@ -775,6 +802,9 @@ function App() {
   const handleBack = () => {
     if (step === 1 && poisonSubStep > 0) {
       setPoisonSubStep(poisonSubStep - 1);
+    } else if (step === 2) {
+      setStep(1);
+      setPoisonSubStep(3);
     } else if (step > 1) {
       setStep(step - 1);
     }
@@ -789,18 +819,6 @@ function App() {
     }
   };
 
-// Pixel Art Back Arrow
-const PixelBackArrow = ({ size = 20 }: { size?: number }) => (
-  <svg width={size} height={size} viewBox="0 0 32 32" fill="none">
-    {/* Arrow shaft */}
-    <rect x="12" y="14" width="12" height="4" fill="currentColor" />
-    {/* Arrow head */}
-    <rect x="10" y="12" width="2" height="8" fill="currentColor" />
-    <rect x="8" y="14" width="2" height="4" fill="currentColor" />
-    <rect x="6" y="16" width="2" height="2" fill="currentColor" />
-  </svg>
-);
-
   return (
     <div className={`app-shell ${Capacitor.isNativePlatform() ? 'is-native' : 'web-preview'} ${step <= 1 ? 'theme-cream' : 'theme-dark'}`}>
       {/* Background blobs for premium glow styling */}
@@ -813,15 +831,17 @@ const PixelBackArrow = ({ size = 20 }: { size?: number }) => (
 
       <div className="app-content">
         {/* Navigation Header */}
-        {step >= 1 && (
+        {step >= 0 && (
           <header className="app-header">
             <div className="app-logo" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
               <img src="/logo.jpg" alt="SuuQuit Logo" style={{ width: '32px', height: '32px', borderRadius: '12px', flexShrink: 0 }} />
-              <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: '#1e293b' }}>
+              <span style={{ letterSpacing: '-0.5px', fontWeight: 800, fontSize: '18px', color: step <= 1 ? '#1e293b' : '#ffffff' }}>
                 Suu<span style={{ color: '#ef4444' }}>Quit</span>
               </span>
             </div>
-            {((step > 2 && step < 5) || (step === 1 && poisonSubStep > 0)) && (
+            
+            {/* Step 0: Skip button */}
+            {step === 0 && (
               <button 
                 className="btn-secondary" 
                 style={{ 
@@ -837,6 +857,31 @@ const PixelBackArrow = ({ size = 20 }: { size?: number }) => (
                   backgroundColor: '#ffffff',
                   color: '#1e293b',
                   boxShadow: '2px 2px 0px #1e293b',
+                  cursor: 'pointer'
+                }} 
+                onClick={() => setStep(1)}
+              >
+                <PixelSkip size={16} />
+              </button>
+            )}
+
+            {/* Back button for Step 1 (poison sub-steps > 0) and Step 2 (Welcome screen) */}
+            {((step === 2) || (step === 1 && poisonSubStep > 0)) && (
+              <button 
+                className="btn-secondary" 
+                style={{ 
+                  padding: '8px', 
+                  borderRadius: '8px', 
+                  width: '36px', 
+                  height: '36px', 
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center', 
+                  marginLeft: 'auto',
+                  border: step <= 1 ? '2px solid #1e293b' : '2px solid #ffffff',
+                  backgroundColor: step <= 1 ? '#ffffff' : '#1e293b',
+                  color: step <= 1 ? '#1e293b' : '#ffffff',
+                  boxShadow: step <= 1 ? '2px 2px 0px #1e293b' : '2px 2px 0px #ffffff',
                   cursor: 'pointer'
                 }} 
                 onClick={handleBack}
