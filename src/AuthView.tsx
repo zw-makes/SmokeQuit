@@ -327,6 +327,7 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
 
             {/* Form */}
             <form onSubmit={(e) => { e.preventDefault(); handleAuthOption(); }} style={{ display: 'flex', flexDirection: 'column', gap: '14px' }}>
+              {/* Full Name */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '14px', color: '#1e293b' }}>Full Name</label>
                 <div style={{ position: 'relative' }}>
@@ -338,31 +339,6 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Alex Mercer"
-                    required
-                    style={{
-                      width: '100%',
-                      padding: '12px 12px 12px 42px',
-                      borderRadius: '10px',
-                      border: '2px solid #1e293b',
-                      fontSize: '15px',
-                      fontFamily: "'Inter', sans-serif",
-                      backgroundColor: '#ffffff'
-                    }}
-                  />
-                </div>
-              </div>
-
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
-                <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '14px', color: '#1e293b' }}>Email Address</label>
-                <div style={{ position: 'relative' }}>
-                  <span style={{ position: 'absolute', left: '14px', top: '12px', color: '#1e293b' }}>
-                    <PixelEnvelope size={18} />
-                  </span>
-                  <input 
-                    type="email" 
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="you@domain.com"
                     required
                     style={{
                       width: '100%',
@@ -410,6 +386,33 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
                 </div>
               </div>
 
+              {/* Email Address */}
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
+                <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '14px', color: '#1e293b' }}>Email Address</label>
+                <div style={{ position: 'relative' }}>
+                  <span style={{ position: 'absolute', left: '14px', top: '12px', color: '#1e293b' }}>
+                    <PixelEnvelope size={18} />
+                  </span>
+                  <input 
+                    type="email" 
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    placeholder="you@domain.com"
+                    required
+                    style={{
+                      width: '100%',
+                      padding: '12px 12px 12px 42px',
+                      borderRadius: '10px',
+                      border: '2px solid #1e293b',
+                      fontSize: '15px',
+                      fontFamily: "'Inter', sans-serif",
+                      backgroundColor: '#ffffff'
+                    }}
+                  />
+                </div>
+              </div>
+
+              {/* Password */}
               <div style={{ display: 'flex', flexDirection: 'column', gap: '6px' }}>
                 <label style={{ fontFamily: "'Outfit', sans-serif", fontWeight: 700, fontSize: '14px', color: '#1e293b' }}>Password</label>
                 <div style={{ position: 'relative' }}>
