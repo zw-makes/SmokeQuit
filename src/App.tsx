@@ -201,35 +201,6 @@ const PixelFirstAid = () => (
   </svg>
 );
 
-
-
-const PixelFlyingMoney = () => (
-  <svg width="80" height="80" viewBox="0 0 32 32" fill="none" style={{ marginRight: '8px' }}>
-    {/* Left Wing */}
-    <g className="wing-left" style={{ transformOrigin: '10px 14px' }}>
-      <path d="M10 11H7v2H5v2H3v3h2v-2h2v-2h3v-3z" fill="#f1f5f9" />
-      <path d="M7 13H5v2H3v2h2v-2h2v-2z" fill="#cbd5e1" />
-    </g>
-    
-    {/* Right Wing */}
-    <g className="wing-right" style={{ transformOrigin: '22px 14px' }}>
-      <path d="M22 11h3v2h2v2h2v3h-2v-2h-2v-2h-3v-3z" fill="#f1f5f9" />
-      <path d="M25 13h2v2h2v2h-2v-2h-2v-2z" fill="#cbd5e1" />
-    </g>
-    
-    {/* Cash Stack */}
-    <rect x="10" y="16" width="12" height="2" fill="#15803d" />
-    <rect x="10" y="13" width="12" height="3" fill="#166534" />
-    <rect x="9" y="10" width="14" height="4" fill="#22c55e" />
-    <rect x="10" y="11" width="12" height="2" fill="#86efac" />
-    <rect x="15" y="11" width="2" height="2" fill="#22c55e" />
-    
-    {/* Yellow Band */}
-    <rect x="14" y="9" width="4" height="6" fill="#f59e0b" />
-    <rect x="15" y="9" width="2" height="6" fill="#d97706" />
-  </svg>
-);
-
 const PixelArrow = () => (
   <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
     {/* Pixelated Orangish-Red Arrow Pointing Right */}
@@ -261,17 +232,36 @@ function App() {
       }
     };
 
+    const triggerHeartbeat = async () => {
+      try {
+        await Haptics.impact({ style: ImpactStyle.Light });
+        const t = setTimeout(() => {
+          Haptics.impact({ style: ImpactStyle.Light }).catch(() => {});
+        }, 130);
+        timers.push(t);
+      } catch (e) {
+        if (navigator.vibrate) {
+          navigator.vibrate([30, 80, 30]);
+        }
+      }
+    };
+
     if (step === 0 || step === 1) {
       setRevealedElements(0);
 
-      // Define sequential intervals (in ms) for 6 reveal steps (since Pipe is removed)
-      const staggerTimes = [400, 800, 1100, 1400, 1700, 2000];
+      // Define sequential intervals (in ms) for 7 reveal steps
+      const staggerTimes = [400, 700, 1000, 1300, 1600, 1900, 2200];
 
       staggerTimes.forEach((delay, index) => {
         const t = setTimeout(() => {
           setRevealedElements(index + 1);
-          // Quote (index 0) and Button (index 5) get Medium haptics, others get Light haptics
-          triggerHaptic(index === 0 || index === 5 ? ImpactStyle.Medium : ImpactStyle.Light);
+          if (index === 0) {
+            triggerHeartbeat();
+          } else if (index === 6) {
+            triggerHaptic(ImpactStyle.Medium);
+          } else {
+            triggerHaptic(ImpactStyle.Light);
+          }
         }, delay);
         timers.push(t);
       });
@@ -423,29 +413,34 @@ function App() {
           {/* SLIDE 0: Cream Quote Screen 1 */}
           <div className={`slide slide-cream ${step === 0 ? 'slide-active' : 'slide-prev'}`}>
             {/* Scattered Pixel Elements */}
-            <div style={{ position: 'absolute', top: '8%', left: '10%', transform: 'rotate(-10deg)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', top: '6%', left: '8%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
               <div className={`pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
                 <PixelMatch />
               </div>
             </div>
-            <div style={{ position: 'absolute', top: '12%', right: '12%', transform: 'rotate(20deg)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', top: '10%', right: '12%', transform: 'rotate(25deg)', pointerEvents: 'none' }}>
               <div className={`pop-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                 <PixelCigarette />
               </div>
             </div>
-            <div style={{ position: 'absolute', top: '44%', right: '10%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', top: '26%', right: '28%', transform: 'rotate(20deg)', pointerEvents: 'none' }}>
               <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`}>
+                <PixelPack />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', top: '48%', right: '12%', transform: 'rotate(-10deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 5 ? 'visible' : ''}`}>
                 <PixelVape />
               </div>
             </div>
-            <div style={{ position: 'absolute', bottom: '22%', left: '12%', transform: 'rotate(10deg)', pointerEvents: 'none' }}>
-              <div className={`pop-item ${revealedElements >= 5 ? 'visible' : ''}`}>
+            <div style={{ position: 'absolute', bottom: '22%', left: '16%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`}>
                 <PixelFirstAid />
               </div>
             </div>
             {/* Pill Pack Button & Pointing Arrow (Slide 0) */}
             <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
-              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className={`pop-item ${revealedElements >= 7 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
                   <PixelArrow />
                 </div>
@@ -457,7 +452,9 @@ function App() {
                   }}
                   style={{ transform: 'rotate(15deg)' }}
                 >
-                  <PixelPills />
+                  <div className="pixel-btn-hover-wrap">
+                    <PixelPills />
+                  </div>
                 </div>
               </div>
             </div>
@@ -476,7 +473,7 @@ function App() {
                 </span> clears.<br />So will you <span style={{ color: '#f95c3b' }}>- zw</span>"
               </div>
             </div>
-            <div className={`click-helper ${revealedElements >= 6 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
+            <div className={`click-helper ${revealedElements >= 7 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
               Tap the pills to continue
             </div>
           </div>
@@ -484,29 +481,34 @@ function App() {
           {/* SLIDE 1: Cream Quote Screen 2 */}
           <div className={`slide slide-cream ${step === 1 ? 'slide-active' : step < 1 ? 'slide-next' : 'slide-prev'}`}>
             {/* Shuffled Scattered Pixel Elements for Slide 1 */}
-            <div style={{ position: 'absolute', top: '8%', left: '12%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', top: '12%', right: '10%', transform: 'rotate(-10deg)', pointerEvents: 'none' }}>
               <div className={`pop-item ${revealedElements >= 2 ? 'visible' : ''}`}>
-                <PixelFlyingMoney />
-              </div>
-            </div>
-            <div style={{ position: 'absolute', top: '14%', right: '12%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
-              <div className={`pop-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                 <PixelPack />
               </div>
             </div>
-            <div style={{ position: 'absolute', top: '48%', left: '8%', transform: 'rotate(-25deg)', pointerEvents: 'none' }}>
-              <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`}>
+            <div style={{ position: 'absolute', top: '28%', left: '16%', transform: 'rotate(-20deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 3 ? 'visible' : ''}`}>
                 <PixelCigarette />
               </div>
             </div>
-            <div style={{ position: 'absolute', bottom: '20%', left: '14%', transform: 'rotate(12deg)', pointerEvents: 'none' }}>
+            <div style={{ position: 'absolute', top: '30%', right: '24%', transform: 'rotate(12deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 4 ? 'visible' : ''}`}>
+                <PixelMatch />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', top: '46%', right: '14%', transform: 'rotate(-15deg)', pointerEvents: 'none' }}>
               <div className={`pop-item ${revealedElements >= 5 ? 'visible' : ''}`}>
+                <PixelFirstAid />
+              </div>
+            </div>
+            <div style={{ position: 'absolute', bottom: '22%', left: '12%', transform: 'rotate(15deg)', pointerEvents: 'none' }}>
+              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`}>
                 <PixelCigar />
               </div>
             </div>
             {/* Pill Pack Button & Pointing Arrow (Slide 1) */}
             <div style={{ position: 'absolute', bottom: '80px', right: '32px', display: 'flex', alignItems: 'center', gap: '8px', zIndex: 20 }}>
-              <div className={`pop-item ${revealedElements >= 6 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+              <div className={`pop-item ${revealedElements >= 7 ? 'visible' : ''}`} style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                 <div className="arrow-bounce" style={{ pointerEvents: 'none' }}>
                   <PixelArrow />
                 </div>
@@ -518,7 +520,9 @@ function App() {
                   }}
                   style={{ transform: 'rotate(-15deg)' }}
                 >
-                  <PixelPills />
+                  <div className="pixel-btn-hover-wrap">
+                    <PixelPills />
+                  </div>
                 </div>
               </div>
             </div>
@@ -529,7 +533,7 @@ function App() {
                 "We quit together.<br />For our lungs, our wallets,<br />and our friends. <span style={{ color: '#f95c3b' }}>- zw</span>"
               </div>
             </div>
-            <div className={`click-helper ${revealedElements >= 6 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
+            <div className={`click-helper ${revealedElements >= 7 ? 'visible' : ''}`} style={{ zIndex: 10 }}>
               Tap the pills to continue
             </div>
           </div>
