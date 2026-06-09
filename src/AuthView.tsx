@@ -218,11 +218,40 @@ export const AuthView: React.FC<AuthViewProps> = ({ onSuccess }) => {
             </button>
 
             {/* Don't have an account? Sign Up text */}
-            <div style={{ textAlign: 'center', marginTop: '16px' }}>
+            <div style={{ textAlign: 'center', marginTop: '16px', marginBottom: '24px' }}>
               <span style={{ fontFamily: "'Inter', sans-serif", fontSize: '13px', color: '#555555' }}>
                 Don't have an account? <span onClick={() => setScreen('signup')} style={{ color: '#ef4444', fontWeight: 'bold', cursor: 'pointer', textDecoration: 'underline' }}>Sign Up</span>
               </span>
             </div>
+
+            {/* Next Button */}
+            <button 
+              onClick={handleAuthOption}
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: '8px',
+                padding: '14px 20px',
+                borderRadius: '12px',
+                border: '2px solid #1e293b',
+                backgroundColor: '#1e293b',
+                color: '#ffffff',
+                fontFamily: "'Outfit', sans-serif",
+                fontWeight: 700,
+                fontSize: '16px',
+                boxShadow: '4px 4px 0px #ef4444',
+                cursor: 'pointer',
+                width: '100%',
+                transition: 'all 0.1s ease',
+              }}
+            >
+              <span>Next</span>
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </button>
           </div>
         )}
 
