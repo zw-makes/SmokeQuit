@@ -10,6 +10,7 @@ import {
   Sparkles,
   Share2
 } from 'lucide-react';
+import AuthPage from './AuthPage';
 
 // Pixel Art Icons
 const PixelCigarette = ({ size = 80 }: { size?: number }) => (
@@ -520,6 +521,7 @@ function App() {
   const [poisonSubStep, setPoisonSubStep] = useState(0);
   const [age, setAge] = useState(25);
   const [smokingIntensity, setSmokingIntensity] = useState<string>('');
+  const [showAuth, setShowAuth] = useState(false);
 
   // Staggered element revealing state for onboarding quote slides
   const [revealedElements, setRevealedElements] = useState(0);
@@ -1276,7 +1278,10 @@ function App() {
                 <div className="bullet"></div>
                 <div className="bullet"></div>
               </div>
-              <button className="btn-primary" onClick={handleNext}>
+              <button className="btn-primary" onClick={() => {
+                triggerHapticFeedback(ImpactStyle.Medium);
+                setShowAuth(true);
+              }}>
                 Get Started <ArrowRight size={18} />
               </button>
             </div>
@@ -1554,6 +1559,31 @@ function App() {
 
         </div>
       </div>
+
+      {showAuth && (
+        <div 
+          className="auth-overlay-container" 
+          style={{ 
+            position: 'absolute', 
+            top: 0, 
+            left: 0, 
+            right: 0, 
+            bottom: 0, 
+            zIndex: 9999, 
+            backgroundColor: 'var(--cream-bg, #fbfbf4)'
+          }}
+        >
+          <AuthPage 
+            onAuthSuccess={() => {
+              setShowAuth(false);
+              handleNext();
+            }} 
+            onBack={() => {
+              setShowAuth(false);
+            }} 
+          />
+        </div>
+      )}
     </div>
   );
 }
